@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+:root {
+  --background: #faf7f2;
+  --foreground: #1f1f2e;
+
+  --font-display: var(--font-passions-conflict);
+  --font-ui: var(--font-montserrat);
+  --font-handwritten: var(--font-caveat);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  background-color: #fff7e7;
+
+  color: #1f1f2e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Display */
+
+.font-display {
+  font-family: var(--font-display), cursive;
+}
+
+/* UI / Functional */
+
+.font-ui {
+  font-family: var(--font-ui), sans-serif;
+}
+
+/* Handwritten */
+
+.font-handwritten {
+  font-family: var(--font-handwritten), cursive;
+}
