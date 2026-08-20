@@ -223,7 +223,7 @@ export default function About() {
       fontFamily: "var(--font-montserrat)",
     }}
   >
-    Samarinda, 22/12/2005
+    Design & Branding
   </div>
 
 
