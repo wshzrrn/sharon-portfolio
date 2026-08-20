@@ -286,6 +286,35 @@ export default function About() {
     >
       Sep 2023 — Present
     </p>
+
+    <a
+  href="/cv/sharon-glorya-cv.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="
+    mt-6
+    inline-flex
+    items-center
+    gap-2
+    rounded-full
+    bg-[#CF1C1F]
+    px-6
+    py-3
+    text-sm
+    font-semibold
+    text-white
+    transition-all
+    duration-300
+    hover:-translate-y-1
+    hover:shadow-[0_10px_25px_rgba(251,37,1,0.2)]
+  "
+  style={{
+    fontFamily: "var(--font-montserrat)",
+  }}
+>
+  View My CV
+  <span>↗</span>
+</a>
   </div>
 </div>
 

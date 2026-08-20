@@ -258,10 +258,6 @@ export default function Hero({
         {/* I AM — FADE UP */}
         {/* ================================================= */}
 
-        <FadeUp
-          play={introFinished}
-          delay={0.45}
-        >
           <div
             className="
               absolute
@@ -310,17 +306,11 @@ export default function Hero({
               i am
             </span>
           </div>
-        </FadeUp>
-
 
         {/* ================================================= */}
         {/* SHARON GLORYA — FADE UP */}
         {/* ================================================= */}
 
-        <FadeUp
-          play={introFinished}
-          delay={0.55}
-        >
           <div
             className="
               absolute
@@ -370,7 +360,6 @@ export default function Hero({
               Sharon Glorya
             </span>
           </div>
-        </FadeUp>
 
 
         {/* ================================================= */}

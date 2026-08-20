@@ -103,7 +103,7 @@ export default function Contact() {
         <FadeUp delay={0.15}>
 
           <a
-            href={CONTACT_LINKS.whatsapp}
+            href="https://wa.me/6281351572961"
             target="_blank"
             rel="noopener noreferrer"
 
@@ -205,7 +205,7 @@ export default function Contact() {
     {/* =========================================== */}
 
     <a
-      href={CONTACT_LINKS.instagram}
+      href="https://www.instagram.com/wshzrrn?igsh=MW8yNnF2MWY5OWVnZQ=="
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Instagram"
@@ -265,7 +265,7 @@ export default function Contact() {
     {/* =========================================== */}
 
     <a
-      href={CONTACT_LINKS.x}
+      href="https://x.com/wshzrrn"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="X"
@@ -311,7 +311,7 @@ export default function Contact() {
     {/* =========================================== */}
 
     <a
-      href={CONTACT_LINKS.linkedin}
+      href="https://www.linkedin.com/in/sharon-glorya-putri-paingi-165375326?utm_source=share_via&utm_content=profile&utm_medium=member_android"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="LinkedIn"
