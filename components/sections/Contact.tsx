@@ -90,7 +90,9 @@ export default function Contact() {
           >
             ready to write
             <br />
-            the next chapter.?
+            the next chapter
+            <br />
+            with Sharon?
           </h2>
 
         </FadeUp>
@@ -103,7 +105,7 @@ export default function Contact() {
         <FadeUp delay={0.15}>
 
           <a
-            href="https://wa.me/6281351572961"
+            href="sharongloryaa@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
 
