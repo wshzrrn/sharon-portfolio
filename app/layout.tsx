@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Passions_Conflict, Caveat } from "next/font/google";
+import ServiceWorkerRegister from "../components/pwa/ServiceWorkerRegister";
 import "./globals.css";
 
 const passionsConflict = Passions_Conflict({
@@ -33,6 +34,8 @@ export default function RootLayout({
       <body
         className={`${passionsConflict.variable} ${montserrat.variable} ${caveat.variable}`}
       >
+        <ServiceWorkerRegister />
+
         {children}
       </body>
     </html>

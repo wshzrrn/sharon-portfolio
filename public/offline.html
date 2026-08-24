@@ -1,0 +1,2309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+
+  <meta
+    name="theme-color"
+    content="#FFF7E7"
+  />
+
+  <title>Chapter Blocks — Sharon</title>
+
+  <style>
+    :root {
+      --cream: #FFF7E7;
+      --yellow: #FEC841;
+      --red: #CF1C1F;
+      --brown: #BB7D40;
+      --dark-brown: #713901;
+      --pink: #FFD6D6;
+      --green: #709F57;
+      --soft-pink: #FFF0F0;
+      --shadow: rgba(113, 57, 1, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--cream);
+      color: var(--dark-brown);
+      font-family: Arial, Helvetica, sans-serif;
+      overscroll-behavior: none;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+    }
+
+    /* ================================================== */
+    /* PAGE */
+    /* ================================================== */
+
+    .page {
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 26px 18px 50px;
+    }
+
+    /* ================================================== */
+    /* HEADER */
+    /* ================================================== */
+
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--brown);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .title {
+      margin: 0;
+      color: var(--red);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(58px, 11vw, 100px);
+      font-weight: 400;
+      line-height: 0.8;
+    }
+
+    .subtitle {
+      margin: 22px auto 0;
+      max-width: 560px;
+      color: var(--brown);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    /* ================================================== */
+    /* GAME WRAP */
+    /* ================================================== */
+
+    .game-wrap {
+      width: min(100%, 580px);
+      margin: 0 auto;
+    }
+
+    /* ================================================== */
+    /* SCORE */
+    /* ================================================== */
+
+    .score-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 20px auto 10px;
+    }
+
+    .score-box,
+    .status-box {
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .score-box {
+      background: var(--yellow);
+      color: var(--dark-brown);
+    }
+
+    .status-box {
+      background: var(--pink);
+      color: var(--red);
+    }
+
+    /* ================================================== */
+    /* BOARD */
+    /* ================================================== */
+
+    .board {
+      position: relative;
+
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 5px;
+
+      width: 100%;
+      aspect-ratio: 1;
+
+      padding: 10px;
+
+      border: 3px solid var(--brown);
+      border-radius: 24px;
+
+      background: var(--soft-pink);
+
+      box-shadow:
+        0 12px 30px var(--shadow);
+
+      touch-action: none;
+      user-select: none;
+    }
+
+    .cell {
+      position: relative;
+
+      width: 100%;
+      height: 100%;
+
+      border-radius: 8px;
+
+      background:
+        rgba(255, 247, 231, 0.72);
+
+      transition:
+        background 0.1s ease,
+        transform 0.1s ease;
+    }
+
+    .cell.preview-valid {
+      background:
+        rgba(254, 200, 65, 0.55);
+
+      transform: scale(0.93);
+    }
+
+    .cell.preview-invalid {
+      background:
+        rgba(207, 28, 31, 0.22);
+
+      transform: scale(0.93);
+    }
+
+    .cell.filled {
+      border-radius: 9px;
+
+      box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.42),
+        0 3px 5px rgba(113, 57, 1, 0.12);
+    }
+
+    /* ================================================== */
+    /* BLOCK COLORS */
+    /* ================================================== */
+
+    .red {
+      background: var(--red);
+    }
+
+    .yellow {
+      background: var(--yellow);
+    }
+
+    .pink {
+      background: var(--pink);
+    }
+
+    .green {
+      background: var(--green);
+    }
+
+    .brown {
+      background: var(--brown);
+    }
+
+    /* ================================================== */
+    /* BLOCK TRAY */
+    /* ================================================== */
+
+    .pieces-title {
+      margin: 24px 0 12px;
+
+      text-align: center;
+
+      color: var(--brown);
+
+      font-size: 12px;
+      font-weight: 800;
+
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .pieces {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .piece-slot {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 110px;
+
+      padding: 10px;
+
+      border: 2px dashed rgba(187, 125, 64, 0.38);
+      border-radius: 18px;
+
+      background:
+        rgba(255, 214, 214, 0.28);
+
+      cursor: grab;
+
+      touch-action: none;
+      user-select: none;
+
+      transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        background 0.18s ease,
+        opacity 0.18s ease;
+    }
+
+    .piece-slot:hover {
+      transform: translateY(-3px);
+
+      border-color: var(--brown);
+
+      background:
+        rgba(255, 214, 214, 0.46);
+    }
+
+    .piece-slot:active {
+      cursor: grabbing;
+    }
+
+    .piece-slot.dragging {
+      opacity: 0.25;
+    }
+
+    .piece-visual {
+      display: grid;
+      gap: 4px;
+
+      pointer-events: none;
+
+      transition:
+        transform 0.15s ease;
+    }
+
+    .piece-slot:hover .piece-visual {
+      transform: scale(1.04);
+    }
+
+    .mini-cell {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+
+      box-shadow:
+        inset 0 2px 0 rgba(255,255,255,0.35),
+        0 2px 4px rgba(113,57,1,0.10);
+    }
+
+    /* ================================================== */
+    /* DRAG GHOST */
+    /* ================================================== */
+
+    .drag-ghost {
+      position: fixed;
+
+      left: 0;
+      top: 0;
+
+      z-index: 10000;
+
+      display: grid;
+
+      gap: 4px;
+
+      pointer-events: none;
+
+      transform:
+        translate(-50%, -50%)
+        scale(1.12)
+        rotate(-2deg);
+
+      transform-origin: center;
+
+      filter:
+        drop-shadow(
+          0 10px 14px
+          rgba(113,57,1,0.18)
+        );
+
+      opacity: 0.96;
+    }
+
+    .ghost-cell {
+      width: 24px;
+      height: 24px;
+
+      border-radius: 6px;
+
+      box-shadow:
+        inset 0 2px 0 rgba(255,255,255,0.35);
+    }
+
+    /* ================================================== */
+    /* BUTTONS */
+    /* ================================================== */
+
+    .actions {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      justify-content: center;
+
+      gap: 12px;
+
+      margin-top: 18px;
+    }
+
+    .button {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      min-width: 190px;
+
+      padding: 13px 20px;
+
+      border-radius: 999px;
+
+      text-decoration: none;
+
+      cursor: pointer;
+
+      font-size: 13px;
+      font-weight: 800;
+
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .restart {
+      background: var(--yellow);
+      color: var(--dark-brown);
+
+      box-shadow:
+        0 4px 0 var(--brown);
+    }
+
+    .portfolio {
+      background: var(--red);
+      color: var(--cream);
+
+      box-shadow:
+        0 4px 0 var(--dark-brown);
+    }
+
+    .tip {
+      margin: 14px auto 0;
+
+      max-width: 460px;
+
+      text-align: center;
+
+      color: var(--brown);
+
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    /* ================================================== */
+    /* GAME OVER */
+    /* ================================================== */
+
+    .game-over {
+      display: none;
+
+      width: fit-content;
+
+      margin: 16px auto 0;
+
+      padding: 12px 16px;
+
+      border-radius: 999px;
+
+      background: var(--red);
+
+      color: var(--cream);
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .game-over.show {
+      display: block;
+    }
+
+    /* ================================================== */
+    /* PDF MODAL */
+    /* ================================================== */
+
+    .modal {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 9999;
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      background:
+        rgba(63, 74, 50, 0.72);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-card {
+      display: flex;
+      flex-direction: column;
+
+      width: min(1100px, 100%);
+      height: min(92vh, 900px);
+
+      overflow: hidden;
+
+      border-radius: 22px;
+
+      background: var(--cream);
+
+      box-shadow:
+        0 25px 80px rgba(0,0,0,0.28);
+    }
+
+    .modal-topbar {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 12px;
+
+      padding: 12px 14px;
+
+      background: var(--yellow);
+    }
+
+    .modal-title {
+      color: var(--dark-brown);
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-button {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 8px 12px;
+
+      border-radius: 999px;
+
+      background: var(--red);
+
+      color: var(--cream);
+
+      text-decoration: none;
+
+      cursor: pointer;
+
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .close-button {
+      background: var(--dark-brown);
+    }
+
+    .pdf-frame {
+      flex: 1;
+
+      width: 100%;
+
+      border: 0;
+
+      background: #e8e8e8;
+    }
+
+    /* ================================================== */
+    /* MOBILE */
+    /* ================================================== */
+
+    @media (max-width: 520px) {
+      .page {
+        padding: 22px 14px 40px;
+      }
+
+      .board {
+        gap: 4px;
+        padding: 7px;
+        border-radius: 20px;
+      }
+
+      .cell {
+        border-radius: 6px;
+      }
+
+      .piece-slot {
+        min-height: 92px;
+      }
+
+      .mini-cell {
+        width: 18px;
+        height: 18px;
+      }
+
+      .ghost-cell {
+        width: 21px;
+        height: 21px;
+      }
+
+      .score-row {
+        margin-top: 16px;
+      }
+
+      .modal {
+        padding: 8px;
+      }
+
+      .modal-card {
+        height: 96vh;
+        border-radius: 16px;
+      }
+
+      .modal-title {
+        max-width: 150px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <!-- ================================================= -->
+    <!-- HEADER -->
+    <!-- ================================================= -->
+
+    <header class="header">
+
+      <p class="eyebrow">
+        offline mode
+      </p>
+
+    </header>
+
+
+    <!-- ================================================= -->
+    <!-- GAME -->
+    <!-- ================================================= -->
+
+    <section class="game-wrap">
+
+      <div class="score-row">
+
+        <div class="score-box">
+          SCORE:
+          <span id="score">
+            0
+          </span>
+        </div>
+
+        <div
+          id="status"
+          class="status-box"
+        >
+          DRAG A BLOCK
+        </div>
+
+      </div>
+
+
+      <!-- BOARD -->
+
+      <div
+        id="board"
+        class="board"
+      ></div>
+
+
+      <!-- BLOCK TRAY -->
+
+      <div class="pieces-title">
+        drag a block onto the board
+      </div>
+
+      <div
+        id="pieces"
+        class="pieces"
+      ></div>
+
+
+      <!-- GAME OVER -->
+
+      <div
+        id="gameOver"
+        class="game-over"
+      >
+        Chapter paused — no more moves.
+      </div>
+
+
+      <!-- ACTIONS -->
+
+      <div class="actions">
+
+        <button
+          id="restart"
+          class="button restart"
+          type="button"
+        >
+          ↻ Restart
+        </button>
+
+        <button
+          id="openPdf"
+          class="button portfolio"
+          type="button"
+        >
+          📄 View My Portfolio
+        </button>
+
+      </div>
+
+
+      <p class="tip">
+        Drag a block from the tray and release it
+        over the board. Complete rows or columns
+        to clear them.
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================================================= -->
+  <!-- PDF MODAL -->
+  <!-- ================================================= -->
+
+  <div
+    id="pdfModal"
+    class="modal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-card">
+
+      <div class="modal-topbar">
+
+        <div class="modal-title">
+          Sharon Glorya — Portfolio
+        </div>
+
+
+        <div class="modal-actions">
+
+          <button
+            id="downloadPdf"
+            class="modal-button"
+            type="button"
+          >
+            Download PDF ↓
+          </button>
+
+          <button
+            id="closePdf"
+            class="modal-button close-button"
+            type="button"
+          >
+            Close
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <iframe
+        id="pdfFrame"
+        class="pdf-frame"
+        title="Sharon Glorya Portfolio PDF"
+      ></iframe>
+
+    </div>
+
+  </div>
+
+
+  <script>
+    /* ================================================== */
+    /* CONSTANTS */
+    /* ================================================== */
+
+    const PDF_URL =
+      "/porto/porto.pdf";
+
+    const BOARD_SIZE = 8;
+
+    const COLORS = [
+      "red",
+      "yellow",
+      "pink",
+      "green",
+      "brown",
+    ];
+
+    const SHAPES = [
+      [
+        [0, 0],
+        [0, 1],
+      ],
+
+      [
+        [0, 0],
+        [0, 1],
+        [0, 2],
+      ],
+
+      [
+        [0, 0],
+        [1, 0],
+        [1, 1],
+      ],
+
+      [
+        [0, 0],
+        [0, 1],
+        [1, 0],
+        [1, 1],
+      ],
+
+      [
+        [0, 0],
+        [1, 0],
+        [2, 0],
+      ],
+
+      [
+        [0, 0],
+        [0, 1],
+        [0, 2],
+        [0, 3],
+      ],
+
+      [
+        [0, 0],
+        [1, 0],
+        [2, 0],
+        [2, 1],
+      ],
+
+      [
+        [0, 0],
+        [0, 1],
+        [1, 1],
+        [1, 2],
+      ],
+
+      [
+        [0, 1],
+        [1, 0],
+        [1, 1],
+        [1, 2],
+      ],
+    ];
+
+
+    /* ================================================== */
+    /* STATE */
+    /* ================================================== */
+
+    let boardState = [];
+
+    let pieces = [];
+
+    let score = 0;
+
+    let gameOver = false;
+
+    let activeDrag = null;
+
+
+    /* ================================================== */
+    /* ELEMENTS */
+    /* ================================================== */
+
+    const boardElement =
+      document.getElementById("board");
+
+    const piecesElement =
+      document.getElementById("pieces");
+
+    const scoreElement =
+      document.getElementById("score");
+
+    const statusElement =
+      document.getElementById("status");
+
+    const gameOverElement =
+      document.getElementById("gameOver");
+
+
+    /* ================================================== */
+    /* BOARD HELPERS */
+    /* ================================================== */
+
+    function createEmptyBoard() {
+      return Array.from(
+        { length: BOARD_SIZE },
+        () =>
+          Array(BOARD_SIZE).fill(null)
+      );
+    }
+
+
+    function randomColor() {
+      return COLORS[
+        Math.floor(
+          Math.random() *
+          COLORS.length
+        )
+      ];
+    }
+
+
+    function randomShape() {
+      return {
+        shape:
+          SHAPES[
+            Math.floor(
+              Math.random() *
+              SHAPES.length
+            )
+          ],
+
+        color:
+          randomColor(),
+      };
+    }
+
+
+    /* ================================================== */
+    /* RENDER BOARD */
+    /* ================================================== */
+
+    function renderBoard() {
+      boardElement.innerHTML = "";
+
+      for (
+        let row = 0;
+        row < BOARD_SIZE;
+        row++
+      ) {
+
+        for (
+          let col = 0;
+          col < BOARD_SIZE;
+          col++
+        ) {
+
+          const cell =
+            document.createElement(
+              "div"
+            );
+
+          cell.className =
+            "cell";
+
+          cell.dataset.row =
+            String(row);
+
+          cell.dataset.col =
+            String(col);
+
+          const value =
+            boardState[row][col];
+
+          if (value) {
+
+            cell.classList.add(
+              "filled",
+              value.color
+            );
+
+          }
+
+          boardElement.appendChild(
+            cell
+          );
+        }
+      }
+    }
+
+
+    /* ================================================== */
+    /* CREATE PIECE VISUAL */
+    /* ================================================== */
+
+    function createPieceVisual(
+      piece,
+      className = "piece-visual"
+    ) {
+
+      const container =
+        document.createElement(
+          "div"
+        );
+
+      container.className =
+        className;
+
+
+      const maxRow =
+        Math.max(
+          ...piece.shape.map(
+            ([row]) => row
+          )
+        );
+
+      const maxCol =
+        Math.max(
+          ...piece.shape.map(
+            ([, col]) => col
+          )
+        );
+
+
+      const cellSize =
+        className === "drag-ghost"
+          ? 24
+          : 22;
+
+
+      container.style.gridTemplateColumns =
+        `repeat(${maxCol + 1}, ${cellSize}px)`;
+
+      container.style.gridTemplateRows =
+        `repeat(${maxRow + 1}, ${cellSize}px)`;
+
+
+      piece.shape.forEach(
+        ([row, col]) => {
+
+          const block =
+            document.createElement(
+              "div"
+            );
+
+          block.className =
+            className === "drag-ghost"
+              ? `ghost-cell ${piece.color}`
+              : `mini-cell ${piece.color}`;
+
+          block.style.gridRow =
+            String(row + 1);
+
+          block.style.gridColumn =
+            String(col + 1);
+
+          container.appendChild(
+            block
+          );
+        }
+      );
+
+
+      return container;
+    }
+
+
+    /* ================================================== */
+    /* RENDER PIECES */
+    /* ================================================== */
+
+    function renderPieces() {
+      piecesElement.innerHTML = "";
+
+      pieces.forEach(
+        (piece, index) => {
+
+          const slot =
+            document.createElement(
+              "div"
+            );
+
+          slot.className =
+            "piece-slot";
+
+          slot.dataset.index =
+            String(index);
+
+
+          if (piece) {
+
+            const visual =
+              createPieceVisual(
+                piece
+              );
+
+            slot.appendChild(
+              visual
+            );
+
+
+            slot.addEventListener(
+              "pointerdown",
+              (event) => {
+                beginDrag(
+                  event,
+                  index
+                );
+              }
+            );
+
+          }
+
+          piecesElement.appendChild(
+            slot
+          );
+        }
+      );
+    }
+
+
+    /* ================================================== */
+    /* CAN PLACE */
+    /* ================================================== */
+
+    function canPlace(
+      piece,
+      startRow,
+      startCol
+    ) {
+
+      return piece.shape.every(
+        ([row, col]) => {
+
+          const boardRow =
+            startRow + row;
+
+          const boardCol =
+            startCol + col;
+
+
+          return (
+            boardRow >= 0 &&
+            boardRow < BOARD_SIZE &&
+            boardCol >= 0 &&
+            boardCol < BOARD_SIZE &&
+            !boardState[
+              boardRow
+            ][
+              boardCol
+            ]
+          );
+        }
+      );
+    }
+
+
+    /* ================================================== */
+    /* GET BOARD POSITION */
+    /* ================================================== */
+
+    function getBoardPosition(
+      clientX,
+      clientY,
+      piece
+    ) {
+
+      const rect =
+        boardElement.getBoundingClientRect();
+
+
+      const relativeX =
+        clientX - rect.left;
+
+      const relativeY =
+        clientY - rect.top;
+
+
+      const cellWidth =
+        rect.width /
+        BOARD_SIZE;
+
+
+      const cellHeight =
+        rect.height /
+        BOARD_SIZE;
+
+
+      const centerRow =
+        Math.floor(
+          relativeY /
+          cellHeight
+        );
+
+      const centerCol =
+        Math.floor(
+          relativeX /
+          cellWidth
+        );
+
+
+      /*
+       * Center the shape around
+       * the pointer.
+       */
+
+      const minRow =
+        Math.min(
+          ...piece.shape.map(
+            ([row]) => row
+          )
+        );
+
+      const maxRow =
+        Math.max(
+          ...piece.shape.map(
+            ([row]) => row
+          )
+        );
+
+      const minCol =
+        Math.min(
+          ...piece.shape.map(
+            ([, col]) => col
+          )
+        );
+
+      const maxCol =
+        Math.max(
+          ...piece.shape.map(
+            ([, col]) => col
+          )
+        );
+
+
+      const shapeHeight =
+        maxRow - minRow + 1;
+
+      const shapeWidth =
+        maxCol - minCol + 1;
+
+
+      const startRow =
+        centerRow -
+        Math.floor(
+          shapeHeight / 2
+        );
+
+      const startCol =
+        centerCol -
+        Math.floor(
+          shapeWidth / 2
+        );
+
+
+      return {
+        row: startRow,
+        col: startCol,
+      };
+    }
+
+
+    /* ================================================== */
+    /* CLEAR PREVIEW */
+    /* ================================================== */
+
+    function clearPreview() {
+      const cells =
+        boardElement.querySelectorAll(
+          ".cell"
+        );
+
+      cells.forEach(
+        (cell) => {
+
+          cell.classList.remove(
+            "preview-valid",
+            "preview-invalid"
+          );
+        }
+      );
+    }
+
+
+    /* ================================================== */
+    /* SHOW PREVIEW */
+    /* ================================================== */
+
+    function showPreview(
+      row,
+      col,
+      piece
+    ) {
+
+      clearPreview();
+
+
+      const valid =
+        canPlace(
+          piece,
+          row,
+          col
+        );
+
+
+      piece.shape.forEach(
+        ([shapeRow, shapeCol]) => {
+
+          const boardRow =
+            row + shapeRow;
+
+          const boardCol =
+            col + shapeCol;
+
+
+          if (
+            boardRow < 0 ||
+            boardRow >= BOARD_SIZE ||
+            boardCol < 0 ||
+            boardCol >= BOARD_SIZE
+          ) {
+            return;
+          }
+
+
+          const cell =
+            boardElement.querySelector(
+              `[data-row="${boardRow}"][data-col="${boardCol}"]`
+            );
+
+
+          if (!cell) {
+            return;
+          }
+
+
+          cell.classList.add(
+            valid
+              ? "preview-valid"
+              : "preview-invalid"
+          );
+        }
+      );
+
+
+      return valid;
+    }
+
+
+    /* ================================================== */
+    /* DRAG START */
+    /* ================================================== */
+
+    function beginDrag(
+      event,
+      pieceIndex
+    ) {
+
+      if (
+        gameOver ||
+        !pieces[pieceIndex]
+      ) {
+        return;
+      }
+
+
+      event.preventDefault();
+
+
+      const piece =
+        pieces[pieceIndex];
+
+
+      const slot =
+        piecesElement.querySelector(
+          `[data-index="${pieceIndex}"]`
+        );
+
+
+      if (slot) {
+        slot.classList.add(
+          "dragging"
+        );
+      }
+
+
+      const ghost =
+        createPieceVisual(
+          piece,
+          "drag-ghost"
+        );
+
+
+      document.body.appendChild(
+        ghost
+      );
+
+
+      activeDrag = {
+        pointerId:
+          event.pointerId,
+
+        pieceIndex,
+
+        piece,
+
+        ghost,
+
+        row: null,
+
+        col: null,
+
+        valid: false,
+
+        slot,
+      };
+
+
+      updateDrag(
+        event.clientX,
+        event.clientY
+      );
+
+
+      document.addEventListener(
+        "pointermove",
+        handlePointerMove
+      );
+
+
+      document.addEventListener(
+        "pointerup",
+        handlePointerUp,
+        { once: true }
+      );
+
+
+      document.addEventListener(
+        "pointercancel",
+        handlePointerCancel,
+        { once: true }
+      );
+
+
+      statusElement.textContent =
+        "PLACE YOUR BLOCK";
+    }
+
+
+    /* ================================================== */
+    /* DRAG MOVE */
+    /* ================================================== */
+
+    function handlePointerMove(
+      event
+    ) {
+
+      if (!activeDrag) {
+        return;
+      }
+
+
+      updateDrag(
+        event.clientX,
+        event.clientY
+      );
+    }
+
+
+    function updateDrag(
+      clientX,
+      clientY
+    ) {
+
+      if (!activeDrag) {
+        return;
+      }
+
+
+      const {
+        piece,
+        ghost,
+      } = activeDrag;
+
+
+      /*
+       * Keep ghost close to pointer.
+       */
+
+      ghost.style.left =
+        `${clientX}px`;
+
+      ghost.style.top =
+        `${clientY - 58}px`;
+
+
+      const boardRect =
+        boardElement.getBoundingClientRect();
+
+
+      const isOverBoard =
+        clientX >= boardRect.left &&
+        clientX <= boardRect.right &&
+        clientY >= boardRect.top &&
+        clientY <= boardRect.bottom;
+
+
+      if (!isOverBoard) {
+
+        clearPreview();
+
+        activeDrag.row =
+          null;
+
+        activeDrag.col =
+          null;
+
+        activeDrag.valid =
+          false;
+
+        statusElement.textContent =
+          "PLACE YOUR BLOCK";
+
+        return;
+      }
+
+
+      const position =
+        getBoardPosition(
+          clientX,
+          clientY,
+          piece
+        );
+
+
+      const valid =
+        showPreview(
+          position.row,
+          position.col,
+          piece
+        );
+
+
+      activeDrag.row =
+        position.row;
+
+      activeDrag.col =
+        position.col;
+
+      activeDrag.valid =
+        valid;
+
+
+      statusElement.textContent =
+        valid
+          ? "READY TO DROP"
+          : "CAN'T FIT HERE";
+    }
+
+
+    /* ================================================== */
+    /* DRAG END */
+    /* ================================================== */
+
+    function handlePointerUp(
+      event
+    ) {
+
+      finishDrag(
+        event.clientX,
+        event.clientY
+      );
+    }
+
+
+    function handlePointerCancel() {
+
+      if (!activeDrag) {
+        return;
+      }
+
+
+      finishDrag(
+        null,
+        null,
+        true
+      );
+    }
+
+
+    function finishDrag(
+      clientX,
+      clientY,
+      cancelled = false
+    ) {
+
+      if (!activeDrag) {
+        return;
+      }
+
+
+      document.removeEventListener(
+        "pointermove",
+        handlePointerMove
+      );
+
+
+      document.removeEventListener(
+        "pointerup",
+        handlePointerUp
+      );
+
+
+      document.removeEventListener(
+        "pointercancel",
+        handlePointerCancel
+      );
+
+
+      const {
+        piece,
+        pieceIndex,
+        slot,
+        row,
+        col,
+        valid,
+        ghost,
+      } = activeDrag;
+
+
+      if (slot) {
+        slot.classList.remove(
+          "dragging"
+        );
+      }
+
+
+      clearPreview();
+
+
+      if (
+        !cancelled &&
+        clientX !== null &&
+        clientY !== null &&
+        row !== null &&
+        col !== null &&
+        valid
+      ) {
+
+        placePiece(
+          piece,
+          pieceIndex,
+          row,
+          col
+        );
+
+      } else {
+
+        statusElement.textContent =
+          "DRAG A BLOCK";
+
+      }
+
+
+      ghost.remove();
+
+
+      activeDrag = null;
+    }
+
+
+    /* ================================================== */
+    /* PLACE PIECE */
+    /* ================================================== */
+
+    function placePiece(
+      piece,
+      pieceIndex,
+      row,
+      col
+    ) {
+
+      if (
+        !canPlace(
+          piece,
+          row,
+          col
+        )
+      ) {
+        return;
+      }
+
+
+      piece.shape.forEach(
+        ([shapeRow, shapeCol]) => {
+
+          boardState[
+            row + shapeRow
+          ][
+            col + shapeCol
+          ] = {
+            color:
+              piece.color,
+          };
+
+        }
+      );
+
+
+      pieces[pieceIndex] =
+        null;
+
+
+      score +=
+        piece.shape.length * 2;
+
+
+      const cleared =
+        clearCompletedLines();
+
+
+      if (
+        cleared > 0
+      ) {
+
+        statusElement.textContent =
+          cleared >= 2
+            ? "CHAPTER COMBO!"
+            : "CHAPTER CLEARED!";
+
+      } else {
+
+        statusElement.textContent =
+          "NICE MOVE!";
+
+      }
+
+
+      replaceEmptyPieces();
+
+      renderBoard();
+
+      renderPieces();
+
+      updateScore();
+
+      checkGameOver();
+    }
+
+
+    /* ================================================== */
+    /* CLEAR LINES */
+    /* ================================================== */
+
+    function clearCompletedLines() {
+
+      const rowsToClear = [];
+
+      const colsToClear = [];
+
+
+      /*
+       * ROWS
+       */
+
+      for (
+        let row = 0;
+        row < BOARD_SIZE;
+        row++
+      ) {
+
+        if (
+          boardState[row].every(
+            Boolean
+          )
+        ) {
+          rowsToClear.push(
+            row
+          );
+        }
+
+      }
+
+
+      /*
+       * COLUMNS
+       */
+
+      for (
+        let col = 0;
+        col < BOARD_SIZE;
+        col++
+      ) {
+
+        let full = true;
+
+
+        for (
+          let row = 0;
+          row < BOARD_SIZE;
+          row++
+        ) {
+
+          if (
+            !boardState[row][col]
+          ) {
+
+            full = false;
+
+            break;
+          }
+
+        }
+
+
+        if (full) {
+          colsToClear.push(
+            col
+          );
+        }
+      }
+
+
+      const totalCleared =
+        rowsToClear.length +
+        colsToClear.length;
+
+
+      if (
+        totalCleared === 0
+      ) {
+        return 0;
+      }
+
+
+      rowsToClear.forEach(
+        (row) => {
+
+          for (
+            let col = 0;
+            col < BOARD_SIZE;
+            col++
+          ) {
+
+            boardState[row][col] =
+              null;
+
+          }
+
+        }
+      );
+
+
+      colsToClear.forEach(
+        (col) => {
+
+          for (
+            let row = 0;
+            row < BOARD_SIZE;
+            row++
+          ) {
+
+            boardState[row][col] =
+              null;
+
+          }
+
+        }
+      );
+
+
+      score +=
+        totalCleared * 10;
+
+
+      return totalCleared;
+    }
+
+
+    /* ================================================== */
+    /* REFILL */
+    /* ================================================== */
+
+    function replaceEmptyPieces() {
+
+      for (
+        let i = 0;
+        i < pieces.length;
+        i++
+      ) {
+
+        if (
+          pieces[i] === null
+        ) {
+
+          pieces[i] =
+            randomShape();
+
+        }
+
+      }
+
+    }
+
+
+    /* ================================================== */
+    /* GAME OVER */
+    /* ================================================== */
+
+    function hasAnyMove() {
+
+      for (
+        let i = 0;
+        i < pieces.length;
+        i++
+      ) {
+
+        const piece =
+          pieces[i];
+
+
+        if (!piece) {
+          continue;
+        }
+
+
+        for (
+          let row = 0;
+          row < BOARD_SIZE;
+          row++
+        ) {
+
+          for (
+            let col = 0;
+            col < BOARD_SIZE;
+            col++
+          ) {
+
+            if (
+              canPlace(
+                piece,
+                row,
+                col
+              )
+            ) {
+
+              return true;
+
+            }
+
+          }
+
+        }
+
+      }
+
+
+      return false;
+    }
+
+
+    function checkGameOver() {
+
+      if (
+        !hasAnyMove()
+      ) {
+
+        gameOver = true;
+
+        gameOverElement.classList.add(
+          "show"
+        );
+
+        statusElement.textContent =
+          "GAME OVER";
+      }
+
+    }
+
+
+    /* ================================================== */
+    /* SCORE */
+    /* ================================================== */
+
+    function updateScore() {
+
+      scoreElement.textContent =
+        String(score);
+
+    }
+
+
+    /* ================================================== */
+    /* RESTART */
+    /* ================================================== */
+
+    function restartGame() {
+
+      boardState =
+        createEmptyBoard();
+
+
+      pieces = [
+        randomShape(),
+        randomShape(),
+        randomShape(),
+      ];
+
+
+      score = 0;
+
+      gameOver = false;
+
+      activeDrag = null;
+
+
+      gameOverElement.classList.remove(
+        "show"
+      );
+
+
+      clearPreview();
+
+
+      renderBoard();
+
+      renderPieces();
+
+      updateScore();
+
+
+      statusElement.textContent =
+        "DRAG A BLOCK";
+    }
+
+
+    /* ================================================== */
+    /* PDF MODAL */
+    /* ================================================== */
+
+    const pdfModal =
+      document.getElementById(
+        "pdfModal"
+      );
+
+    const pdfFrame =
+      document.getElementById(
+        "pdfFrame"
+      );
+
+    const openPdf =
+      document.getElementById(
+        "openPdf"
+      );
+
+    const closePdf =
+      document.getElementById(
+        "closePdf"
+      );
+
+    const downloadPdf =
+      document.getElementById(
+        "downloadPdf"
+      );
+
+
+    async function openPdfViewer() {
+
+      try {
+
+        const response =
+          await fetch(
+            PDF_URL
+          );
+
+
+        if (!response.ok) {
+          throw new Error(
+            "Could not load PDF"
+          );
+        }
+
+
+        const blob =
+          await response.blob();
+
+
+        const blobUrl =
+          URL.createObjectURL(
+            blob
+          );
+
+
+        pdfFrame.src =
+          blobUrl;
+
+
+        pdfModal.classList.add(
+          "open"
+        );
+
+
+        pdfModal.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+
+        pdfFrame.dataset.blobUrl =
+          blobUrl;
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+
+        alert(
+          "The portfolio PDF is not available offline yet."
+        );
+
+      }
+
+    }
+
+
+    function closePdfViewer() {
+
+      const blobUrl =
+        pdfFrame.dataset.blobUrl;
+
+
+      if (blobUrl) {
+
+        URL.revokeObjectURL(
+          blobUrl
+        );
+
+      }
+
+
+      pdfFrame.src =
+        "";
+
+
+      delete
+        pdfFrame.dataset.blobUrl;
+
+
+      pdfModal.classList.remove(
+        "open"
+      );
+
+
+      pdfModal.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+    }
+
+
+    async function downloadPortfolio() {
+
+      try {
+
+        const response =
+          await fetch(
+            PDF_URL
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Could not download PDF"
+          );
+
+        }
+
+
+        const blob =
+          await response.blob();
+
+
+        const url =
+          URL.createObjectURL(
+            blob
+          );
+
+
+        const anchor =
+          document.createElement(
+            "a"
+          );
+
+
+        anchor.href =
+          url;
+
+
+        anchor.download =
+          "Sharon-Glorya-Portfolio.pdf";
+
+
+        document.body.appendChild(
+          anchor
+        );
+
+
+        anchor.click();
+
+
+        anchor.remove();
+
+
+        URL.revokeObjectURL(
+          url
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+
+        alert(
+          "The PDF is not available offline yet."
+        );
+
+      }
+
+    }
+
+
+    openPdf.addEventListener(
+      "click",
+      openPdfViewer
+    );
+
+
+    closePdf.addEventListener(
+      "click",
+      closePdfViewer
+    );
+
+
+    downloadPdf.addEventListener(
+      "click",
+      downloadPortfolio
+    );
+
+
+    pdfModal.addEventListener(
+      "click",
+      (event) => {
+
+        if (
+          event.target ===
+          pdfModal
+        ) {
+          closePdfViewer();
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closePdfViewer();
+
+        }
+
+      }
+    );
+
+
+    /* ================================================== */
+    /* START GAME */
+    /* ================================================== */
+
+    document
+      .getElementById(
+        "restart"
+      )
+      .addEventListener(
+        "click",
+        restartGame
+      );
+
+
+    restartGame();
+  </script>
+
+</body>
+</html>
