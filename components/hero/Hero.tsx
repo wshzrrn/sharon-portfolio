@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import FadeUp from "../animations/FadeUp";
 
 interface HeroProps {
   introFinished: boolean;
@@ -45,15 +44,21 @@ export default function Hero({
     };
   }, [introFinished]);
 
-
   return (
     <section
       id="home"
       className="
         relative
-        min-h-screen
+        h-[680px]
         overflow-hidden
         bg-[#FFF7E7]
+
+        sm:h-[700px]
+
+        md:h-[740px]
+
+        lg:min-h-screen
+        lg:h-auto
       "
     >
 
@@ -78,9 +83,11 @@ export default function Hero({
           priority
           className="
             absolute
-            left-[-180px]
-            top-[-380px]
-            w-[900px]
+
+            left-[-150px]
+            top-[-30px]
+            w-[700px]
+
             max-w-none
             rotate-[-30deg]
             object-contain
@@ -100,10 +107,13 @@ export default function Hero({
             xl:left-[-70px]
             xl:top-[-80px]
             xl:w-[1700px]
+
+            2xl:left-[-80px]
+            2xl:top-[-90px]
+            2xl:w-[1900px]
           "
         />
       </div>
-
 
       {/* ===================================================== */}
       {/* MAIN HERO CANVAS */}
@@ -114,15 +124,17 @@ export default function Hero({
           relative
           z-10
           mx-auto
-          min-h-screen
+          h-full
           w-full
           max-w-[1600px]
           px-6
+
           sm:px-8
           lg:px-10
+
+          2xl:max-w-[1800px]
         "
       >
-
 
         {/* ================================================= */}
         {/* DAUN — STATIC */}
@@ -139,9 +151,9 @@ export default function Hero({
             absolute
             z-20
 
-            w-[180px]
-            -bottom-[20px]
-            -left-[45px]
+            w-[290px]
+            top-[125px]
+            left-[65px]
 
             sm:w-[220px]
             sm:-bottom-[25px]
@@ -150,9 +162,12 @@ export default function Hero({
             lg:w-[600px]
             lg:-bottom-[5px]
             lg:-left-[-150px]
+
+            2xl:w-[720px]
+            2xl:-bottom-[5px]
+            2xl:left-[160px]
           "
         />
-
 
         {/* ================================================= */}
         {/* PHOTO FRAMED — STATIC */}
@@ -161,14 +176,18 @@ export default function Hero({
         <div
           className="
             absolute
-            left-0
-            top-[-150px]
+            left-[3%]
+            top-[-35px]
             z-20
-            w-[300px]
+            w-[270px]
 
             sm:left-[1%]
             sm:top-[-150px]
             sm:w-[390px]
+
+            md:left-[1%]
+            md:top-[-150px]
+            md:w-[390px]
 
             lg:left-[2%]
             lg:top-[-150px]
@@ -177,6 +196,10 @@ export default function Hero({
             xl:left-[3%]
             xl:top-[-150px]
             xl:w-[540px]
+
+            2xl:left-[3%]
+            2xl:top-[-180px]
+            2xl:w-[600px]
           "
         >
           <Image
@@ -189,178 +212,221 @@ export default function Hero({
           />
         </div>
 
-
         {/* ================================================= */}
-        {/* HELLO — FADE UP */}
+        {/* HELLO — STATIC */}
         {/* ================================================= */}
 
-        <FadeUp
-          play={introFinished}
-          delay={0.3}
+        <div
+          className="
+            pointer-events-none
+            absolute
+
+            left-[20%]
+            top-[35%]
+            z-30
+
+            w-[470px]
+            h-[200px]
+
+            whitespace-nowrap
+            leading-none
+
+            text-[170px]
+
+            sm:left-[35%]
+            sm:top-[6%]
+            sm:w-[700px]
+            sm:h-[290px]
+            sm:text-[290px]
+
+            md:left-[36%]
+            md:top-[5%]
+            md:w-[800px]
+            md:h-[330px]
+            md:text-[350px]
+
+            lg:left-[38%]
+            lg:!top-[100px]
+            lg:w-[900px]
+            lg:h-[364px]
+            lg:text-[430px]
+
+            xl:left-[43%]
+            xl:!top-[100px]
+            xl:w-[900px]
+            xl:h-[364px]
+            xl:text-[430px]
+
+            2xl:left-[37%]
+            2xl:!top-[90px]
+            2xl:w-[1050px]
+            2xl:h-[420px]
+            2xl:text-[500px]
+          "
+          style={{
+            fontFamily:
+              "var(--font-passions-conflict)",
+            fontWeight: 400,
+            lineHeight: "normal",
+            color: "#CF1C1F",
+            textShadow:
+              "0 4px 36px #FFEDC9",
+            WebkitTextStrokeWidth: "2px",
+            WebkitTextStrokeColor:
+              "#713901",
+          }}
         >
-          <div
+          <span>H</span>
+
+          <span className="-ml-[8px] sm:-ml-[12px]">
+            e
+          </span>
+
+          <span>
+            llo
+          </span>
+        </div>
+
+        {/* ================================================= */}
+        {/* I AM — STATIC */}
+        {/* ================================================= */}
+
+        <div
+          className="
+            absolute
+            left-[32%]
+            top-[49%]
+            z-50
+
+            flex
+            items-center
+            justify-center
+
+            rounded-full
+            bg-[#BB7D40]
+
+            h-[22px]
+            w-[50px]
+
+            sm:left-[42%]
+            sm:top-[38%]
+            sm:h-[58px]
+            sm:w-[140px]
+
+            md:left-[42%]
+            md:top-[38%]
+            md:h-[61px]
+            md:w-[150px]
+
+            lg:left-[47%]
+            lg:!top-[340px]
+            lg:h-[62px]
+            lg:w-[145px]
+
+            xl:left-[47%]
+            xl:!top-[340px]
+            xl:h-[62px]
+            xl:w-[145px]
+
+            2xl:left-[48%]
+            2xl:!top-[390px]
+            2xl:h-[70px]
+            2xl:w-[165px]
+          "
+        >
+          <span
             className="
-              pointer-events-none
-              absolute
-              left-[32%]
-              top-[7%]
-              z-30
-              whitespace-nowrap
-              text-[220px]
+              text-[14px]
+              font-semibold
               leading-none
+              text-[#FFF7E7]
 
-              sm:left-[35%]
-              sm:top-[6%]
-              sm:text-[290px]
+              sm:text-[38px]
+              md:text-[42px]
+              lg:text-[46px]
+              xl:text-[46px]
 
-              md:left-[36%]
-              md:top-[5%]
-              md:text-[350px]
-
-              lg:left-[36%]
-              lg:top-[4%]
-              lg:text-[430px]
-
-              xl:left-[37%]
-              xl:top-[4%]
-              xl:text-[430px]
+              2xl:text-[50px]
             "
             style={{
-              width: "900px",
-              height: "364px",
               fontFamily:
-                "var(--font-passions-conflict)",
-              fontSize: "430px",
-              fontWeight: 400,
-              lineHeight: "normal",
-              color: "#CF1C1F",
-              textShadow:
-                "0 4px 36px #FFEDC9",
-              WebkitTextStrokeWidth: "3px",
-              WebkitTextStrokeColor:
-                "#713901",
+                "var(--font-montserrat)",
             }}
           >
-            <span>H</span>
-
-            <span className="-ml-[12px]">
-              e
-            </span>
-
-            <span>
-              llo
-            </span>
-          </div>
-        </FadeUp>
-
+            i am
+          </span>
+        </div>
 
         {/* ================================================= */}
-        {/* I AM — FADE UP */}
+        {/* SHARON GLORYA — STATIC */}
         {/* ================================================= */}
 
-          <div
+        <div
+          className="
+            absolute
+            left-[49%]
+            top-[55%]
+            z-50
+
+            flex
+            items-center
+            justify-center
+
+            rounded-full
+            bg-[#BB7D40]
+
+            h-[22px]
+            w-[150px]
+
+            sm:left-[59%]
+            sm:top-[49%]
+            sm:h-[58px]
+            sm:w-[380px]
+
+            md:left-[59%]
+            md:top-[49%]
+            md:h-[61px]
+            md:w-[405px]
+
+            lg:left-[64%]
+            lg:!top-[430px]
+            lg:h-[62px]
+            lg:w-[375px]
+
+            xl:left-[64%]
+            xl:!top-[430px]
+            xl:h-[62px]
+            xl:w-[375px]
+
+            2xl:left-[65%]
+            2xl:!top-[480px]
+            2xl:h-[70px]
+            2xl:w-[430px]
+          "
+        >
+          <span
             className="
-              absolute
-              left-[42%]
-              top-[38%]
-              z-50
-              flex
-              items-center
-              justify-center
-              rounded-full
-              bg-[#BB7D40]
+              text-[14px]
+              font-semibold
+              leading-none
+              text-center
+              text-[#FFF7E7]
 
-              h-[52px]
-              w-[126px]
+              sm:text-[38px]
+              md:text-[42px]
+              lg:text-[43px]
+              xl:text-[43px]
 
-              sm:h-[58px]
-              sm:w-[140px]
-
-              md:h-[61px]
-              md:w-[150px]
-
-              lg:h-[62px]
-              lg:w-[145px]
-
-              xl:h-[62px]
-              xl:w-[145px]
+              2xl:text-[48px]
             "
+            style={{
+              fontFamily:
+                "var(--font-montserrat)",
+            }}
           >
-            <span
-              className="
-                text-[34px]
-                font-semibold
-                leading-none
-                text-[#FFF7E7]
-
-                sm:text-[38px]
-                md:text-[42px]
-                lg:text-[46px]
-                xl:text-[46px]
-              "
-              style={{
-                fontFamily:
-                  "var(--font-montserrat)",
-              }}
-            >
-              i am
-            </span>
-          </div>
-
-        {/* ================================================= */}
-        {/* SHARON GLORYA — FADE UP */}
-        {/* ================================================= */}
-
-          <div
-            className="
-              absolute
-              left-[59%]
-              top-[49%]
-              z-50
-              flex
-              items-center
-              justify-center
-              rounded-full
-              bg-[#BB7D40]
-
-              h-[52px]
-              w-[360px]
-
-              sm:h-[58px]
-              sm:w-[380px]
-
-              md:h-[61px]
-              md:w-[405px]
-
-              lg:h-[62px]
-              lg:w-[375px]
-
-              xl:h-[62px]
-              xl:w-[375px]
-            "
-          >
-            <span
-              className="
-                text-[34px]
-                font-semibold
-                leading-none
-                text-center
-                text-[#FFF7E7]
-
-                sm:text-[38px]
-                md:text-[42px]
-                lg:text-[43px]
-                xl:text-[43px]
-              "
-              style={{
-                fontFamily:
-                  "var(--font-montserrat)",
-              }}
-            >
-              Sharon Glorya
-            </span>
-          </div>
-
+            Sharon Glorya
+          </span>
+        </div>
 
         {/* ================================================= */}
         {/* PINK BOX — STATIC */}
@@ -370,11 +436,13 @@ export default function Hero({
           className="
             pointer-events-none
             absolute
-            left-[19%]
-            top-[54%]
+            left-[8%]
+            top-[60%]
             z-40
-            h-[110px]
-            w-[300px]
+
+            h-[100px]
+            w-[78%]
+
             rounded-[8px]
             bg-[#FFD6D6]
             blur-[5px]
@@ -398,9 +466,13 @@ export default function Hero({
             xl:top-[58%]
             xl:h-[185px]
             xl:w-[468px]
+
+            2xl:left-[27%]
+            2xl:top-[59%]
+            2xl:h-[205px]
+            2xl:w-[520px]
           "
         />
-
 
         {/* ================================================= */}
         {/* INTRO TEXT — TYPING EFFECT */}
@@ -409,10 +481,11 @@ export default function Hero({
         <div
           className="
             absolute
-            left-[26%]
-            top-[60%]
+            left-[11%]
+            top-[61%]
             z-50
-            w-[270px]
+
+            w-[72%]
 
             sm:left-[27%]
             sm:top-[59%]
@@ -429,14 +502,18 @@ export default function Hero({
             xl:left-[27%]
             xl:top-[61%]
             xl:w-[430px]
+
+            2xl:left-[27%]
+            2xl:top-[62%]
+            2xl:w-[480px]
           "
         >
           <p
             className="
               text-justify
-              text-[12px]
+              text-[11px]
               font-semibold
-              leading-[1.15]
+              leading-[1.2]
               text-[#BB7D40]
 
               sm:text-[14px]
@@ -450,6 +527,9 @@ export default function Hero({
 
               xl:text-[18px]
               xl:leading-[1.30]
+
+              2xl:text-[20px]
+              2xl:leading-[1.32]
             "
             style={{
               fontFamily:

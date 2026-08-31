@@ -151,201 +151,185 @@ export default function Navbar() {
   }, []);
 
   return (
-    <>
-      {/* ================================================= */}
-      {/* DESKTOP FLOATING NAV */}
-      {/* ================================================= */}
+    <aside
+      className="
+        fixed
+        right-2
+        top-1/2
+        z-50
+        flex
+        -translate-y-1/2
 
-      <aside
+        sm:right-3
+        md:right-5
+      "
+    >
+      <div
         className="
-          fixed
-          right-5
-          top-1/2
-          z-50
-          hidden
-          -translate-y-1/2
-          md:flex
+          relative
+          flex
+          w-[40px]
+          flex-col
+          items-center
+          gap-1
+          rounded-full
+          border
+          border-white/20
+          bg-[#3F4A32]/90
+          px-1
+          py-2.5
+          shadow-[0_20px_50px_rgba(63,74,50,0.25)]
+          backdrop-blur-xl
+
+          sm:w-[50px]
+          sm:gap-2
+          sm:px-2
+          sm:py-3.5
+
+          md:w-[58px]
+          md:gap-2
+          md:px-2
+          md:py-4
         "
       >
-        <div
-          className="
-            relative
-            flex
-            w-[58px]
-            flex-col
-            items-center
-            gap-2
-            rounded-full
-            border
-            border-white/20
-            bg-[#3F4A32]/90
-            px-2
-            py-4
-            shadow-[0_20px_50px_rgba(63,74,50,0.25)]
-            backdrop-blur-xl
-          "
-        >
+        {/* ================================================= */}
+        {/* NAV ITEMS */}
+        {/* ================================================= */}
 
-          {/* ================================================= */}
-          {/* NAV ITEMS */}
-          {/* ================================================= */}
+        {navItems.map((item) => {
+          const isActive =
+            active === item.name;
 
-          {navItems.map((item) => {
-            const isActive =
-              active === item.name;
+          return (
+            <a
+              key={item.name}
+              href={item.href}
+              onClick={() =>
+                setActive(item.name)
+              }
+              className="
+                group
+                relative
+                flex
+                h-7
+                w-7
+                items-center
+                justify-center
+                rounded-full
+                text-[#FFFDF5]
+                transition-all
+                duration-300
+                hover:bg-white/10
 
-            return (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={() =>
-                  setActive(item.name)
-                }
+                sm:h-9
+                sm:w-9
+
+                md:h-10
+                md:w-10
+              "
+            >
+              {/* ================================================= */}
+              {/* ACTIVE DOT */}
+              {/* ================================================= */}
+
+              {isActive && (
+                <span
+                  className="
+                    absolute
+                    -left-[3px]
+                    h-1.5
+                    w-1.5
+                    rounded-full
+                    bg-[#FFD6D6]
+                    shadow-[0_0_10px_rgba(255,214,214,0.8)]
+
+                    sm:-left-1
+                    sm:h-2
+                    sm:w-2
+                  "
+                />
+              )}
+
+              {/* ================================================= */}
+              {/* ICON */}
+              {/* ================================================= */}
+
+              <span
                 className="
-                  group
-                  relative
-                  flex
-                  h-10
-                  w-10
-                  items-center
-                  justify-center
-                  rounded-full
-                  text-[#FFFDF5]
+                  h-[13px]
+                  w-[13px]
                   transition-all
                   duration-300
-                  hover:bg-white/10
+                  group-hover:scale-110
+                  group-hover:text-[#FFD6D6]
+
+                  sm:h-[17px]
+                  sm:w-[17px]
+
+                  md:h-[19px]
+                  md:w-[19px]
                 "
               >
+                {item.icon}
+              </span>
 
-                {/* ACTIVE DOT */}
+              {/* ================================================= */}
+              {/* TOOLTIP — DESKTOP ONLY */}
+              {/* ================================================= */}
 
-                {isActive && (
-                  <span
-                    className="
-                      absolute
-                      -left-1
-                      h-2
-                      w-2
-                      rounded-full
-                      bg-[#FFD6D6]
-                      shadow-[0_0_10px_rgba(255,214,214,0.8)]
-                    "
-                  />
-                )}
+              <span
+                className="
+                  pointer-events-none
+                  absolute
+                  right-[48px]
+                  top-1/2
+                  hidden
+                  -translate-y-1/2
+                  translate-x-2
+                  whitespace-nowrap
+                  rounded-md
+                  bg-[#3F4A32]
+                  px-3
+                  py-1.5
+                  text-xs
+                  text-[#FFFDF5]
+                  opacity-0
+                  shadow-lg
+                  transition-all
+                  duration-200
 
-                {/* ICON */}
+                  md:block
+                  group-hover:translate-x-0
+                  group-hover:opacity-100
+                "
+                style={{
+                  fontFamily:
+                    "var(--font-montserrat)",
+                  fontWeight: 500,
+                }}
+              >
+                {item.name}
+              </span>
+            </a>
+          );
+        })}
 
-                <span
-                  className="
-                    h-[19px]
-                    w-[19px]
-                    transition-all
-                    duration-300
-                    group-hover:scale-110
-                    group-hover:text-[#FFD6D6]
-                  "
-                >
-                  {item.icon}
-                </span>
+        {/* ================================================= */}
+        {/* DIVIDER */}
+        {/* ================================================= */}
 
-                {/* TOOLTIP */}
-
-                <span
-                  className="
-                    pointer-events-none
-                    absolute
-                    right-[48px]
-                    top-1/2
-                    -translate-y-1/2
-                    translate-x-2
-                    whitespace-nowrap
-                    rounded-md
-                    bg-[#3F4A32]
-                    px-3
-                    py-1.5
-                    text-xs
-                    text-[#FFFDF5]
-                    opacity-0
-                    shadow-lg
-                    transition-all
-                    duration-200
-                    group-hover:translate-x-0
-                    group-hover:opacity-100
-                  "
-                  style={{
-                    fontFamily:
-                      "var(--font-montserrat)",
-                    fontWeight: 500,
-                  }}
-                >
-                  {item.name}
-                </span>
-
-              </a>
-            );
-          })}
-
-
-          {/* ================================================= */}
-          {/* DIVIDER */}
-          {/* ================================================= */}
-
-          <div
-            className="
-              my-1
-              h-px
-              w-5
-              bg-white/15
-            "
-          />
-
-        </div>
-      </aside>
-
-
-      {/* ================================================= */}
-      {/* MOBILE NAV */}
-      {/* ================================================= */}
-
-      <header
-        className="
-          fixed
-          left-0
-          top-0
-          z-50
-          flex
-          w-full
-          items-center
-          justify-between
-          border-b
-          border-[#3F4A32]/10
-          bg-[#FFFDF5]/90
-          px-6
-          py-4
-          backdrop-blur-xl
-          md:hidden
-        "
-      >
-
-        <a
-          href="#home"
+        <div
           className="
-            text-2xl
-            font-bold
-            text-[#3F4A32]
-          "
-          style={{
-            fontFamily:
-              "var(--font-montserrat)",
-          }}
-        >
-          May
-          <span className="text-[#FB2501]">
-            .
-          </span>
-        </a>
+            my-0.5
+            h-px
+            w-3
+            bg-white/15
 
-      </header>
-    </>
+            sm:my-1
+            sm:w-5
+          "
+        />
+      </div>
+    </aside>
   );
 }
