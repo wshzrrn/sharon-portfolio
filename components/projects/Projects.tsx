@@ -1,6 +1,7 @@
 "use client";
 
 import FadeUp from "../animations/FadeUp";
+import { motion } from "framer-motion";
 
 const projects = [
   {
@@ -189,8 +190,13 @@ export default function Projects() {
         {/* TITLE */}
         {/* ================================================= */}
 
-        <FadeUp>
-          <div className="relative flex justify-center">
+        <motion.div
+          className="relative flex justify-center"
+          initial={{ opacity: 0, y: 20, scale: 0.96 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, amount: 0.15 }}
+        >
 
             <h2
               className="
@@ -216,8 +222,7 @@ export default function Projects() {
               Projects
             </h2>
 
-          </div>
-        </FadeUp>
+          </motion.div>
 
 
         {/* ================================================= */}
@@ -322,7 +327,7 @@ function ProjectCard({
   color: string;
 }) {
   return (
-    <article
+    <motion.article
       className="
         group
         flex
@@ -338,6 +343,8 @@ function ProjectCard({
         hover:-translate-y-2
         hover:shadow-[0_28px_70px_rgba(0,0,0,0.14)]
       "
+      whileHover={{ scale: 1.01 }}
+      transition={{ duration: 0.3 }}
     >
 
       {/* ============================================= */}
@@ -358,7 +365,7 @@ function ProjectCard({
 
         {/* Decorative circle */}
 
-        <div
+        <motion.div
           className="
             absolute
             -right-16
@@ -372,12 +379,14 @@ function ProjectCard({
             duration-700
             group-hover:scale-125
           "
+          whileHover={{ scale: 1.15 }}
+          transition={{ duration: 0.5 }}
         />
 
 
         {/* Large chapter number */}
 
-        <div
+        <motion.div
           className="
             absolute
             left-7
@@ -389,6 +398,8 @@ function ProjectCard({
             duration-700
             group-hover:scale-110
           "
+          whileHover={{ scale: 1.1, x: 5 }}
+          transition={{ duration: 0.5 }}
           style={{
             fontFamily:
               "var(--font-montserrat)",
@@ -396,7 +407,7 @@ function ProjectCard({
           }}
         >
           {chapter}
-        </div>
+        </motion.div>
 
 
         {/* Chapter label */}
@@ -575,6 +586,6 @@ function ProjectCard({
 
       </div>
 
-    </article>
+    </motion.article>
   );
 }

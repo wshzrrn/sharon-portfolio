@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useRef, type RefObject } from "react";
+import { useRef, type RefObject, useState, useEffect } from "react";
 
 const tools = [
   {
@@ -81,6 +81,12 @@ const tools = [
 
 export default function About() {
   const toolsAreaRef = useRef<HTMLDivElement>(null);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(true);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: no-preference)");
+    setPrefersReducedMotion(!mediaQuery.matches);
+  }, []);
 
   return (
     <section
@@ -123,7 +129,7 @@ export default function About() {
         {/* MAIN YELLOW ABOUT BOX */}
         {/* ================================================= */}
 
-        <div
+        <motion.div
           className="
             relative
             z-10
@@ -139,19 +145,27 @@ export default function About() {
             md:px-10
             md:py-9
           "
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, amount: 0.15 }}
         >
 
           {/* ================================================= */}
 {/* LEFT — GET TO KNOW ME */}
 {/* ================================================= */}
 
-<div
+<motion.div
   className="
     relative
     z-10
     w-full
     md:w-[42%]
   "
+  initial={{ opacity: 0, x: -30 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+  viewport={{ once: true, amount: 0.15 }}
 >
   {/* TITLE */}
 
@@ -316,14 +330,14 @@ export default function About() {
   <span>↗</span>
 </a>
   </div>
-</div>
+</motion.div>
 
 
           {/* ================================================= */}
           {/* RIGHT — STARTER PACK */}
           {/* ================================================= */}
 
-          <div
+          <motion.div
             className="
               relative
               mt-8
@@ -339,6 +353,10 @@ export default function About() {
               md:mt-0
               md:w-[50%]
             "
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, amount: 0.15 }}
           >
 
             {/* ================================================= */}
@@ -458,7 +476,7 @@ export default function About() {
             {/* DRAG ME STICKER */}
             {/* ================================================= */}
 
-            <div
+            <motion.div
               className="
                 absolute
                 bottom-[10px]
@@ -475,6 +493,10 @@ export default function About() {
                 text-center
                 shadow-[0_5px_10px_rgba(113,57,1,0.15)]
               "
+              initial={{ opacity: 0, rotate: -20, scale: 0.8 }}
+              whileInView={{ opacity: 1, rotate: -10, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.35, ease: "backOut" }}
+              viewport={{ once: true, amount: 0.15 }}
             >
 
               <span
@@ -490,11 +512,11 @@ export default function About() {
                 drag me!
               </span>
 
-            </div>
+            </motion.div>
 
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
 
       </div>
 
@@ -520,6 +542,9 @@ function DraggableTool({
   rotate: string;
   constraintsRef: RefObject<HTMLDivElement | null>;
 }) {
+  // Parse position to get tool index for stagger
+  const toolIndex = tools.findIndex((tool) => tool.name === name);
+
   return (
     <motion.div
       drag
@@ -530,6 +555,14 @@ function DraggableTool({
         rotate: 0,
         zIndex: 50,
       }}
+      initial={{ opacity: 0, scale: 0.8, y: 10 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{
+        duration: 0.6,
+        delay: 0.3 + (toolIndex * 0.05),
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      viewport={{ once: true, amount: 0.15 }}
       className={`
         absolute
         ${position}

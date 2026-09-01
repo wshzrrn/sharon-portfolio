@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 interface HeroProps {
   introFinished: boolean;
@@ -10,6 +11,46 @@ interface HeroProps {
 export default function Hero({
   introFinished,
 }: HeroProps) {
+  /* ===================================================== */
+  /* SCROLL PARALLAX */
+  /* ===================================================== */
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end center"],
+  });
+
+  // Parallax transforms - reduce motion on mobile
+  const ikanY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, 40]
+  );
+  const daunY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, 35]
+  );
+  const framedY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, 30]
+  );
+  const helloY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, 15]
+  );
+
+  // Respect prefers-reduced-motion
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(true);
+  
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: no-preference)");
+    setPrefersReducedMotion(!mediaQuery.matches);
+  }, []);
+
   /* ===================================================== */
   /* INTRO TYPING TEXT */
   /* ===================================================== */
@@ -46,6 +87,7 @@ export default function Hero({
 
   return (
     <section
+      ref={sectionRef}
       id="home"
       className="
         relative
@@ -66,7 +108,7 @@ export default function Hero({
       {/* IKAN BACKGROUND */}
       {/* ===================================================== */}
 
-      <div
+      <motion.div
         className="
           pointer-events-none
           absolute
@@ -74,6 +116,9 @@ export default function Hero({
           z-0
           overflow-visible
         "
+        style={{
+          y: prefersReducedMotion ? 0 : ikanY,
+        }}
       >
         <Image
           src="/assets/hero/ikan.png"
@@ -113,7 +158,7 @@ export default function Hero({
             2xl:w-[1900px]
           "
         />
-      </div>
+      </motion.div>
 
       {/* ===================================================== */}
       {/* MAIN HERO CANVAS */}
@@ -137,15 +182,10 @@ export default function Hero({
       >
 
         {/* ================================================= */}
-        {/* DAUN — STATIC */}
+        {/* DAUN — PARALLAX */}
         {/* ================================================= */}
 
-        <Image
-          src="/assets/hero/daun.png"
-          alt=""
-          width={500}
-          height={500}
-          priority
+        <motion.div
           className="
             pointer-events-none
             absolute
@@ -167,13 +207,25 @@ export default function Hero({
             2xl:-bottom-[5px]
             2xl:left-[160px]
           "
-        />
+          style={{
+            y: prefersReducedMotion ? 0 : daunY,
+          }}
+        >
+          <Image
+            src="/assets/hero/daun.png"
+            alt=""
+            width={500}
+            height={500}
+            priority
+            className="w-full h-auto"
+          />
+        </motion.div>
 
         {/* ================================================= */}
-        {/* PHOTO FRAMED — STATIC */}
+        {/* PHOTO FRAMED — PARALLAX */}
         {/* ================================================= */}
 
-        <div
+        <motion.div
           className="
             absolute
             left-[3%]
@@ -201,6 +253,9 @@ export default function Hero({
             2xl:top-[-180px]
             2xl:w-[600px]
           "
+          style={{
+            y: prefersReducedMotion ? 0 : framedY,
+          }}
         >
           <Image
             src="/assets/hero/framed.png"
@@ -210,13 +265,13 @@ export default function Hero({
             priority
             className="h-auto w-full"
           />
-        </div>
+        </motion.div>
 
         {/* ================================================= */}
-        {/* HELLO — STATIC */}
+        {/* HELLO — PARALLAX */}
         {/* ================================================= */}
 
-        <div
+        <motion.div
           className="
             pointer-events-none
             absolute
@@ -274,6 +329,7 @@ export default function Hero({
             WebkitTextStrokeWidth: "2px",
             WebkitTextStrokeColor:
               "#713901",
+            y: prefersReducedMotion ? 0 : helloY,
           }}
         >
           <span>H</span>
@@ -285,7 +341,7 @@ export default function Hero({
           <span>
             llo
           </span>
-        </div>
+        </motion.div>
 
         {/* ================================================= */}
         {/* I AM — STATIC */}

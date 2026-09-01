@@ -1,29 +1,33 @@
 "use client";
 
 import FadeUp from "../animations/FadeUp";
+import { motion } from "framer-motion";
 
-/* ========================================================= */
-/* CONTACT LINKS */
-/* ========================================================= */
+const whatsappNumber = "6287782317610";
 
-const CONTACT_LINKS = {
-  whatsapp:
-    "https://wa.me/628XXXXXXXXXX?text=Hello%20Sharon!%20I%20found%20your%20portfolio%20and%20would%20love%20to%20connect.",
+const whatsappMessage =
+  "Hi Sharon! 👋 I just found your portfolio and I'd love to talk about a project! ✨";
 
-  instagram:
-    "https://www.instagram.com/YOUR_USERNAME/",
+const whatsappUrl =
+  `https://wa.me/${whatsappNumber}` +
+  `?text=${encodeURIComponent(
+    whatsappMessage
+  )}`;
 
-  x:
-    "https://x.com/YOUR_USERNAME",
-
-  linkedin:
-    "https://www.linkedin.com/in/YOUR_USERNAME/",
-};
-
-
-/* ========================================================= */
-/* CONTACT COMPONENT */
-/* ========================================================= */
+const socialLinks = [
+  {
+    label: "Instagram",
+    href: "#",
+  },
+  {
+    label: "LinkedIn",
+    href: "#",
+  },
+  {
+    label: "Behance",
+    href: "#",
+  },
+];
 
 export default function Contact() {
   return (
@@ -31,135 +35,148 @@ export default function Contact() {
       id="contact"
       className="
         relative
-        min-h-[600px]
         overflow-hidden
         bg-[#FFF7E7]
-        px-6
-        py-20
-        sm:min-h-[650px]
-        sm:px-10
-        lg:min-h-[700px]
-        lg:px-16
+        px-5
+        py-16
+        sm:px-8
+        sm:py-20
+        lg:px-10
+        lg:py-24
       "
     >
 
       {/* ================================================= */}
-      {/* MAIN CONTENT */}
+      {/* DECORATIVE SHAPES */}
+      {/* ================================================= */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          overflow-hidden
+        "
+      >
+
+        <div
+          className="
+            absolute
+            -left-20
+            top-16
+            h-56
+            w-56
+            rounded-full
+            bg-[#FFD6D6]/35
+            blur-3xl
+          "
+        />
+
+        <div
+          className="
+            absolute
+            -right-24
+            bottom-12
+            h-64
+            w-64
+            rounded-full
+            bg-[#FEC841]/20
+            blur-3xl
+          "
+        />
+
+        <span
+          className="
+            absolute
+            left-[12%]
+            top-[22%]
+            text-xl
+            text-[#FEC841]
+          "
+        >
+          ✦
+        </span>
+
+        <span
+          className="
+            absolute
+            right-[15%]
+            top-[18%]
+            text-2xl
+            text-[#CF1C1F]
+          "
+        >
+          ✧
+        </span>
+
+        <span
+          className="
+            absolute
+            bottom-[18%]
+            left-[20%]
+            text-lg
+            text-[#CF1C1F]
+          "
+        >
+          •
+        </span>
+
+      </div>
+
+
+      {/* ================================================= */}
+      {/* CONTENT */}
       {/* ================================================= */}
 
       <div
         className="
           relative
+          z-10
           mx-auto
-          min-h-[500px]
           w-full
-          max-w-[1500px]
+          max-w-[1200px]
         "
       >
 
         {/* ================================================= */}
-        {/* CONTACT TITLE */}
+        {/* HEADER */}
         {/* ================================================= */}
 
         <FadeUp>
-
-          <h2
-  className="
-    absolute
-    left-[80px]
-    top-0
-    max-w-[600px]
-    text-[52px]
-    leading-[0.95]
-    text-[#CF1C1F]
-
-    sm:left-[100px]
-    sm:text-[105px]
-
-    md:left-[120px]
-    md:text-[116px]
-
-    lg:left-[150px]
-    lg:text-[128px]
-  "
-            style={{
-              fontFamily:
-                "var(--font-passions-conflict)",
-              fontWeight: 400,
-            }}
-          >
-            ready to write
-            <br />
-            the next chapter
-            <br />
-            with Sharon?
-          </h2>
-
-        </FadeUp>
-
-
-        {/* ================================================= */}
-        {/* CONTACT ME STICKER */}
-        {/* ================================================= */}
-
-        <FadeUp delay={0.15}>
-
-          <a
-            href="sharongloryaa@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-
+          <div
             className="
-              group
-              absolute
-
-              left-[42%]
-              top-[120px]
-
-              flex
-              h-[58px]
-              w-[180px]
-
-              rotate-[-7deg]
-              items-center
-              justify-center
-
-              rounded-[50%]
-
-              bg-[#CF1C1F]
-
-              shadow-[0_6px_0_#713901]
-
-              transition-all
-              duration-300
-
-              hover:rotate-[-3deg]
-              hover:scale-105
-              hover:shadow-[0_9px_0_#713901]
-
-              active:translate-y-[5px]
-              active:shadow-none
-
-              sm:left-[57%]
-              sm:top-[135px]
-              sm:h-[65px]
-              sm:w-[200px]
-
-              lg:left-[50%]
-              lg:top-[150px]
-              lg:h-[72px]
-              lg:w-[220px]
+              text-center
             "
           >
 
-            <span
+            <p
               className="
-                text-[20px]
-                text-[#FFF7E7]
+                text-[10px]
+                font-semibold
+                uppercase
+                tracking-[0.3em]
+                text-[#BB7D40]
+                sm:text-xs
+              "
+              style={{
+                fontFamily:
+                  "var(--font-montserrat)",
+              }}
+            >
+              Let's connect
+            </p>
 
-                sm:text-[50px]
 
-                lg:text-[54px]
+            <h2
+              className="
+                mx-auto
+                mt-4
+                max-w-[850px]
+                text-[58px]
+                leading-[0.88]
+                text-[#CF1C1F]
+                sm:text-[78px]
+                lg:text-[100px]
               "
               style={{
                 fontFamily:
@@ -167,193 +184,347 @@ export default function Contact() {
                 fontWeight: 400,
               }}
             >
-              contact me!
-            </span>
+              Got something
+              <br />
+              fun in mind?
+            </h2>
 
-          </a>
-
+          </div>
         </FadeUp>
 
 
         {/* ================================================= */}
-{/* SOCIAL MEDIA BOX */}
-{/* ================================================= */}
+        {/* MAIN CONTACT ROW */}
+        {/* ================================================= */}
 
-<FadeUp delay={0.3}>
-  <div
-    className="
-      absolute
-      bottom-0
-      right-0
-      flex
-      h-[76px]
-      w-[220px]
-      items-center
-      justify-center
-      gap-4
-      bg-[#FEC841]
+        <FadeUp delay={0.1}>
+          <div
+            className="
+              mt-8
+              flex
+              flex-col
+              items-center
+              gap-8
+              lg:flex-row
+              lg:justify-center
+              lg:gap-16
+            "
+          >
 
-      sm:h-[82px]
-      sm:w-[245px]
+            {/* ================================================= */}
+            {/* ENVELOPE */}
+            {/* ================================================= */}
 
-      lg:h-[90px]
-      lg:w-[280px]
-      lg:gap-5
-    "
-  >
+            <motion.div
+              className="
+                relative
+                flex
+                h-[170px]
+                w-[240px]
+                items-center
+                justify-center
+              "
+              animate={{
+                y: [0, -12, 0],
+                rotate: [-2, 2, -2],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
 
-    {/* =========================================== */}
-    {/* INSTAGRAM */}
-    {/* =========================================== */}
+              <div
+                className="
+                  absolute
+                  bottom-3
+                  h-5
+                  w-36
+                  rounded-full
+                  bg-[#713901]/15
+                  blur-xl
+                "
+              />
 
-    <a
-      href="https://www.instagram.com/wshzrrn?igsh=MW8yNnF2MWY5OWVnZQ=="
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Instagram"
-      className="
-        flex
-        h-[42px]
-        w-[42px]
-        items-center
-        justify-center
-        transition-all
-        duration-300
-        hover:-translate-y-1
-        hover:scale-110
+              <motion.div
+                className="
+                  group
+                  relative
+                  h-[125px]
+                  w-[185px]
+                  rotate-[-4deg]
+                  rounded-[16px]
+                  bg-[#FEC841]
+                  shadow-[0_15px_30px_rgba(113,57,1,0.16)]
+                  transition-all
+                  duration-500
+                  hover:-translate-y-2
+                  hover:rotate-[2deg]
+                "
+                whileHover={{
+                  scale: 1.05,
+                  y: -8,
+                  rotate: -1,
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 10 }}
+              >
 
-        sm:h-[46px]
-        sm:w-[46px]
+                {/* flap */}
 
-        lg:h-[50px]
-        lg:w-[50px]
-      "
-    >
-      <svg
-        viewBox="0 0 24 24"
-        className="h-full w-full"
-        fill="none"
-      >
-        <rect
-          x="3"
-          y="3"
-          width="18"
-          height="18"
-          rx="5"
-          stroke="#ffedc9"
-          strokeWidth="2"
-        />
+                <div
+                  className="
+                    absolute
+                    left-0
+                    top-0
+                    h-[65px]
+                    w-full
+                    rounded-t-[16px]
+                    bg-[#FFD96A]
+                  "
+                  style={{
+                    clipPath:
+                      "polygon(0 0, 100% 0, 50% 72%)",
+                  }}
+                />
 
-        <circle
-          cx="12"
-          cy="12"
-          r="4"
-          stroke="#FB2501"
-          strokeWidth="2"
-        />
+                {/* center message */}
 
-        <circle
-          cx="17.5"
-          cy="6.5"
-          r="1"
-          fill="#FB2501"
-        />
-      </svg>
-    </a>
+                <div
+                  className="
+                    absolute
+                    left-1/2
+                    top-1/2
+                    flex
+                    -translate-x-1/2
+                    -translate-y-1/2
+                    flex-col
+                    items-center
+                    text-center
+                  "
+                >
+                  <span
+                    className="
+                      text-3xl
+                      text-[#CF1C1F]
+                    "
+                  >
+                    ♥
+                  </span>
 
+                  <span
+                    className="
+                      mt-1
+                      whitespace-nowrap
+                      text-[9px]
+                      font-bold
+                      uppercase
+                      tracking-[0.16em]
+                      text-[#713901]
+                    "
+                    style={{
+                      fontFamily:
+                        "var(--font-montserrat)",
+                    }}
+                  >
+                    Open to ideas
+                  </span>
+                </div>
 
-    {/* =========================================== */}
-    {/* X / TWITTER */}
-    {/* =========================================== */}
-
-    <a
-      href="https://x.com/wshzrrn"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="X"
-      className="
-        flex
-        h-[42px]
-        w-[42px]
-        items-center
-        justify-center
-        transition-all
-        duration-300
-        hover:-translate-y-1
-        hover:scale-110
-
-        sm:h-[46px]
-        sm:w-[46px]
-
-        lg:h-[50px]
-        lg:w-[50px]
-      "
-    >
-      <svg
-        viewBox="0 0 24 24"
-        className="
-          h-[32px]
-          w-[32px]
-          fill-[#ffedc9]
-
-          sm:h-[36px]
-          sm:w-[36px]
-
-          lg:h-[40px]
-          lg:w-[40px]
-        "
-      >
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.963 6.817H1.684l7.73-8.835L1.254 2.25h6.826l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z" />
-      </svg>
-    </a>
+              </motion.div>
 
 
-    {/* =========================================== */}
-    {/* LINKEDIN */}
-    {/* =========================================== */}
+              {/* stars */}
 
-    <a
-      href="https://www.linkedin.com/in/sharon-glorya-putri-paingi-165375326?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="LinkedIn"
-      className="
-        flex
-        h-[42px]
-        w-[42px]
-        items-center
-        justify-center
-        transition-all
-        duration-300
-        hover:-translate-y-1
-        hover:scale-110
+              <motion.span
+                className="
+                  absolute
+                  left-2
+                  top-2
+                  text-2xl
+                  text-[#CF1C1F]
+                "
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                ✦
+              </motion.span>
 
-        sm:h-[46px]
-        sm:w-[46px]
+              <motion.span
+                className="
+                  absolute
+                  right-2
+                  top-8
+                  text-lg
+                  text-[#BB7D40]
+                "
+                animate={{ rotate: [0, -8, 8, 0], y: [0, 4, -4, 0] }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.2,
+                }}
+              >
+                ✧
+              </motion.span>
 
-        lg:h-[50px]
-        lg:w-[50px]
-      "
-    >
-      <svg
-        viewBox="0 0 24 24"
-        className="
-          h-[36px]
-          w-[36px]
-          fill-[#ffedc9]
-          sm:h-[40px]
-          sm:w-[40px]
+            </motion.div>
 
-          lg:h-[44px]
-          lg:w-[44px]
-        "
-      >
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V8.999h3.414v1.561h.046c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.287zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM3.555 20.452h3.563V8.999H3.555v11.453zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    </a>
 
-  </div>
-</FadeUp>
+            {/* ================================================= */}
+            {/* CONTACT INFO */}
+            {/* ================================================= */}
+
+            <div
+              className="
+                flex
+                max-w-[450px]
+                flex-col
+                items-center
+                text-center
+                lg:items-start
+                lg:text-left
+              "
+            >
+
+              <p
+                className="
+                  text-sm
+                  leading-6
+                  text-[#68705A]
+                "
+                style={{
+                  fontFamily:
+                    "var(--font-montserrat)",
+                }}
+              >
+                Ready to write the next chapter with Sharon?
+              </p>
+
+
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="
+                  group
+                  mt-5
+                  flex
+                  items-center
+                  gap-3
+                  rounded-full
+                  bg-[#3F4A32]
+                  px-6
+                  py-4
+                  text-sm
+                  font-bold
+                  text-[#FFF7E7]
+                  transition-all
+                  duration-300
+                  hover:-translate-y-1
+                  hover:bg-[#CF1C1F]
+                  hover:shadow-[0_12px_30px_rgba(63,74,50,0.18)]
+                "
+                style={{
+                  fontFamily:
+                    "var(--font-montserrat)",
+                }}
+              >
+                <motion.div
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  Say hello
+                </motion.div>
+
+                <motion.span
+                  className="
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-1
+                  "
+                  whileHover={{ x: 4 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  →
+                </motion.span>
+              </a>
+
+
+              {/* EMAIL */}
+
+              <a
+                href="mailto:wshzrrn@gmail.com"
+                className="
+                  mt-4
+                  text-sm
+                  font-semibold
+                  text-[#BB7D40]
+                  transition-colors
+                  duration-200
+                  hover:text-[#CF1C1F]
+                "
+                style={{
+                  fontFamily:
+                    "var(--font-montserrat)",
+                }}
+              >
+                wshzrrn@gmail.com
+              </a>
+
+
+              {/* SOCIALS */}
+
+              <div
+                className="
+                  mt-4
+                  flex
+                  flex-wrap
+                  justify-center
+                  gap-2
+                  lg:justify-start
+                "
+              >
+                {socialLinks.map(
+                  (link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      className="
+                        rounded-full
+                        border
+                        border-[#3F4A32]/15
+                        bg-white/60
+                        px-3
+                        py-1.5
+                        text-[10px]
+                        font-semibold
+                        text-[#3F4A32]
+                        transition-all
+                        duration-200
+                        hover:border-[#CF1C1F]
+                        hover:text-[#CF1C1F]
+                      "
+                      style={{
+                        fontFamily:
+                          "var(--font-montserrat)",
+                      }}
+                    >
+                      {link.label}
+                    </a>
+                  )
+                )}
+              </div>
+
+            </div>
+
+          </div>
+        </FadeUp>
 
       </div>
 

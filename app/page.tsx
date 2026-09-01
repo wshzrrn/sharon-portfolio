@@ -10,6 +10,7 @@ import OpeningAnimation from "../components/opening/OpeningAnimation";
 import Experience from "../components/sections/Experience";
 import Contact from "../components/sections/Contact";
 import CustomCursor from "../components/ui/CustomCursor";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const [introFinished, setIntroFinished] = useState(false);
@@ -31,6 +32,8 @@ export default function Home() {
       <Experience />
 
       <Contact />
+
+      <Footer/>
       
     </main>
   );
