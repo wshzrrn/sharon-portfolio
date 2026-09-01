@@ -337,7 +337,7 @@ export default function Hero({
           <span
             className="
               text-[14px]
-              font-semibold
+              font-regular
               leading-none
               text-[#FFF7E7]
 
@@ -407,7 +407,8 @@ export default function Hero({
           <span
             className="
               text-[14px]
-              font-semibold
+              font-extrabold
+              italic
               leading-none
               text-center
               text-[#FFF7E7]
@@ -458,17 +459,17 @@ export default function Hero({
             md:w-[441px]
 
             lg:left-[26%]
-            lg:top-[58%]
+            lg:!top-[470px]
             lg:h-[185px]
             lg:w-[468px]
 
             xl:left-[26%]
-            xl:top-[58%]
+            xl:!top-[470px]
             xl:h-[185px]
             xl:w-[468px]
 
             2xl:left-[27%]
-            2xl:top-[59%]
+            2xl:!top-[520px]
             2xl:h-[205px]
             2xl:w-[520px]
           "
@@ -495,16 +496,16 @@ export default function Hero({
             md:top-[60%]
             md:w-[410px]
 
-            lg:left-[27%]
-            lg:top-[61%]
+            lg:left-[26%]
+            lg:!top-[497px]
             lg:w-[430px]
 
             xl:left-[27%]
-            xl:top-[61%]
+            xl:!top-[497px]
             xl:w-[430px]
 
-            2xl:left-[27%]
-            2xl:top-[62%]
+            2xl:left-[27.2%]
+            2xl:!top-[547px]
             2xl:w-[480px]
           "
         >

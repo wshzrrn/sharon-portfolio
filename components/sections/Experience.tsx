@@ -8,6 +8,7 @@ type JourneyItem = {
   title: string;
   subtitle: string;
   year: string;
+  status: "On Progress" | "Finished";
   description?: string;
   bullets?: string[];
 };
@@ -20,11 +21,12 @@ type Folder = {
 };
 
 const journeyData: Record<string, JourneyItem[]> = {
-  "2022-2023": [
+  "2023": [
     {
       title: "Programming Workshop",
       subtitle: "Robotics & Arduino",
       year: "2022",
+      status: "Finished",
       description:
         "Completed a one-month Robotics and Arduino programming training program focused on programming fundamentals, robotics systems, and hands-on project implementation.",
       bullets: [
@@ -33,13 +35,14 @@ const journeyData: Record<string, JourneyItem[]> = {
     },
   ],
 
-  "2023-2024": [],
+  "2024": [],
 
-  "2024-2025": [
+  "2025": [
     {
       title: "Freshmen Partner",
       subtitle: "First Year Program",
       year: "2024 - 2025",
+      status: "Finished",
       description:
         "Mentored 5 first-year students for one academic year by providing guidance on academic adaptation, university requirements, and personal development.",
       bullets: [
@@ -51,6 +54,7 @@ const journeyData: Record<string, JourneyItem[]> = {
       title: "Photography Project",
       subtitle: "Photography",
       year: "2024",
+      status: "Finished",
       description:
         "Created photography concepts using composition and visual storytelling techniques.",
       bullets: [
@@ -60,11 +64,12 @@ const journeyData: Record<string, JourneyItem[]> = {
     },
   ],
 
-  "2025-2026": [
+  "2026": [
     {
       title: "Python Tutoring Class",
       subtitle: "Programming",
       year: "2025",
+      status: "Finished",
       description:
         "Taught Python programming fundamentals to students from a lower academic batch within the same major.",
       bullets: [
@@ -76,6 +81,7 @@ const journeyData: Record<string, JourneyItem[]> = {
       title: "Booking Management Database System",
       subtitle: "Omnichannel",
       year: "2025",
+      status: "Finished",
       bullets: [
         "Designed and developed a database management system for room reservation processes across multiple booking channels.",
         "Created database structures, entity relationships, and booking workflows using ERD concepts.",
@@ -87,54 +93,11 @@ const journeyData: Record<string, JourneyItem[]> = {
       title: "UI/UX Case Study",
       subtitle: "SehatYuk Mobile Application",
       year: "2025",
+      status: "Finished",
       bullets: [
         "Conducted user-centered research and developed interface solutions for a healthcare application targeting young parents.",
         "Created user flows, wireframes, and prototypes to improve accessibility and usability.",
         "Designed interface structures focused on simple navigation and user experience optimization.",
-      ],
-    },
-
-    {
-      title: "System Testing & Implementation Project",
-      subtitle: "System Testing",
-      year: "2025",
-      bullets: [
-        "Conducted system testing and evaluation to identify errors and improve functionality.",
-        "Assisted in implementation processes and documented testing results.",
-        "Proposed improvements to optimize system performance.",
-      ],
-    },
-
-    {
-      title: "Project Management Project",
-      subtitle: "Project Management",
-      year: "2025",
-      bullets: [
-        "Planned project workflows, timelines, and task allocation.",
-        "Collaborated with team members to achieve project goals efficiently.",
-        "Monitored project progress and evaluated project outcomes.",
-      ],
-    },
-
-    {
-      title: "ChaynPay Fintech Branding Project",
-      subtitle: "Branding & Visual Identity",
-      year: "2025",
-      bullets: [
-        "Developed branding concepts and visual identity for a fintech payment solution focused on international transactions and remittance services.",
-        "Created brand personality, visual assets, and design concepts to strengthen brand communication.",
-        "Designed user-centered visual elements aligned with brand values and target audiences.",
-      ],
-    },
-
-    {
-      title: "Interactive Children's Illustration Book",
-      subtitle: "Kota Solo",
-      year: "2025",
-      bullets: [
-        "Designed and developed an interactive children's illustration book consisting of visual storytelling and interactive elements.",
-        "Created illustrations, layouts, and engaging visual concepts to enhance children's learning experiences.",
-        "Applied storytelling and visual communication principles to improve audience engagement.",
       ],
     },
   ],
@@ -142,34 +105,34 @@ const journeyData: Record<string, JourneyItem[]> = {
 
 const folders: Folder[] = [
   {
-    id: "2022-2023",
-    label: "2022-2023",
-    color: "#709F57",
-    textColor: "#FFF7E7",
+    id: "2026",
+    label: "2026",
+    color: "#CF1C1F",
+    textColor: "#FEC841",
   },
   {
-    id: "2023-2024",
-    label: "2023-2024",
-    color: "#FFD6D6",
-    textColor: "#BB7D40",
-  },
-  {
-    id: "2024-2025",
-    label: "2024-2025",
+    id: "2025",
+    label: "2025",
     color: "#713901",
     textColor: "#FFF7E7",
   },
   {
-    id: "2025-2026",
-    label: "2025-2026",
-    color: "#CF1C1F",
-    textColor: "#FEC841",
+    id: "2024",
+    label: "2024",
+    color: "#FFD6D6",
+    textColor: "#BB7D40",
+  },
+  {
+    id: "2023",
+    label: "≤ 2023",
+    color: "#709F57",
+    textColor: "#FFF7E7",
   },
 ];
 
 export default function Experience() {
   const [activeYear, setActiveYear] =
-    useState("2025-2026");
+    useState("2026");
 
   const activeFolder =
     folders.find(
@@ -524,22 +487,64 @@ export default function Experience() {
                             "
                           >
 
-                            {/* DATE */}
+                            {/* DATE + STATUS */}
 
-                            <span
-                              className="
-                                text-xs
-                                font-bold
-                                tracking-[0.18em]
-                                text-[#CF1C1F]
-                              "
-                              style={{
-                                fontFamily:
-                                  "var(--font-montserrat)",
-                              }}
-                            >
-                              {item.year}
-                            </span>
+<div
+  className="
+    flex
+    items-center
+    justify-between
+    gap-3
+  "
+>
+  <span
+    className="
+      text-xs
+      font-bold
+      tracking-[0.18em]
+      text-[#CF1C1F]
+    "
+    style={{
+      fontFamily:
+        "var(--font-montserrat)",
+    }}
+  >
+    {item.year}
+  </span>
+
+  <span
+    className="
+      rounded-full
+      border
+      px-3
+      py-1
+      text-[9px]
+      font-bold
+      uppercase
+      tracking-[0.12em]
+    "
+    style={{
+      fontFamily:
+        "var(--font-montserrat)",
+      color:
+        item.status === "On Progress"
+          ? "#BB7D40"
+          : "#709F57",
+      borderColor:
+        item.status === "On Progress"
+          ? "#BB7D40"
+          : "#709F57",
+      backgroundColor:
+        item.status === "On Progress"
+          ? "#FFEDC9"
+          : "#EAF2E5",
+    }}
+  >
+    {item.status === "On Progress"
+      ? "● On Progress"
+      : "● Finished"}
+  </span>
+</div>
 
 
                             {/* TITLE */}

@@ -5,7 +5,7 @@ import FadeUp from "../animations/FadeUp";
 const projects = [
   {
     chapter: "01",
-    title: "College Projects [SI]",
+    title: "Information Systems",
     category: "",
     description: "",
     color: "#BB7D40",
@@ -13,7 +13,7 @@ const projects = [
   },
   {
     chapter: "02",
-    title: "Work",
+    title: "Professional Work",
     category: "",
     description: "",
     color: "#FFD6D6",
@@ -21,7 +21,7 @@ const projects = [
   },
   {
     chapter: "03",
-    title: "Random",
+    title: "Creative Experiments",
     category: "",
     description: "",
     color: "#FEC841",
@@ -29,7 +29,7 @@ const projects = [
   },
   {
     chapter: "04",
-    title: "College Projects [DKV]",
+    title: "Visual Design",
     category: "",
     description: "",
     color: "#709F57",
@@ -53,36 +53,122 @@ export default function Projects() {
     >
 
       {/* ================================================= */}
-{/* TOP SCALLOPED EDGE */}
+{/* BACKGROUND STRIPES */}
 {/* ================================================= */}
 
 <div
   className="
     pointer-events-none
     absolute
-    left-0
-    right-0
-    top-0
-    z-20
-    h-[100px]
+    inset-0
+    z-0
     overflow-hidden
   "
 >
-  <div className="absolute -top-[30px] left-0 flex w-full">
-    {Array.from({ length: 30 }).map((_, index) => (
-      <div
-        key={`top-${index}`}
-        className="
-          h-[70px]
-          w-[70px]
-          shrink-0
-          rounded-full
-          bg-[#FFF7E7]
-        "
-      />
-    ))}
-  </div>
+  {Array.from({ length: 14 }).map(
+    (_, index) => {
+      const isLight = index % 2 === 0;
+
+      return (
+        <div
+          key={`stripe-${index}`}
+          className="
+            absolute
+            top-0
+            h-full
+          "
+          style={{
+            left: `${index * 7.2}%`,
+            width:
+              index % 3 === 0
+                ? "4.5%"
+                : "5.2%",
+            backgroundColor: isLight
+              ? "#FFF7E7"
+              : "#FEC841",
+            opacity: isLight
+              ? 0.10
+              : 0.07,
+            transform:
+              index % 2 === 0
+                ? "skewX(-1deg)"
+                : "skewX(1deg)",
+          }}
+        >
+          {/* INNER BLUE LINE */}
+
+          <div
+            className="
+              absolute
+              left-1/2
+              top-0
+              h-full
+              w-[3px]
+              -translate-x-1/2
+              rounded-full
+            "
+            style={{
+              backgroundColor:
+                "#A9C5D6",
+              opacity: 0.28,
+            }}
+          />
+
+          {/* SOFT INNER HIGHLIGHT */}
+
+          <div
+            className="
+              absolute
+              left-[22%]
+              top-0
+              h-full
+              w-[10px]
+            "
+            style={{
+              backgroundColor:
+                "#FFFDF5",
+              opacity: 0.08,
+            }}
+          />
+        </div>
+      );
+    }
+  )}
 </div>
+
+      {/* ================================================= */}
+      {/* TOP SCALLOPED EDGE */}
+      {/* ================================================= */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-0
+          right-0
+          top-0
+          z-20
+          h-[100px]
+          overflow-hidden
+        "
+      >
+        <div className="absolute -top-[30px] left-0 flex w-full">
+          {Array.from({ length: 30 }).map(
+            (_, index) => (
+              <div
+                key={`top-${index}`}
+                className="
+                  h-[70px]
+                  w-[70px]
+                  shrink-0
+                  rounded-full
+                  bg-[#FFF7E7]
+                "
+              />
+            )
+          )}
+        </div>
+      </div>
 
 
       {/* ================================================= */}
@@ -119,9 +205,9 @@ export default function Projects() {
                 lg:text-[150px]
               "
               style={{
-                fontFamily: "var(--font-passions-conflict)",
+                fontFamily:
+                  "var(--font-passions-conflict)",
                 fontWeight: 400,
-
 
                 textShadow:
                   "3px 4px 0 #713901, 0 8px 18px rgba(113,57,1,0.25)",
@@ -150,25 +236,29 @@ export default function Projects() {
           "
         >
 
-          {projects.map((project, index) => (
+          {projects.map(
+            (project, index) => (
 
-            <div
-              key={project.title}
-              className={`${project.span} h-full`}
-            >
-
-              <FadeUp
-                delay={index * 0.08}
-                className="h-full"
+              <div
+                key={project.title}
+                className={`${project.span} h-full`}
               >
 
-                <ProjectCard {...project} />
+                <FadeUp
+                  delay={index * 0.08}
+                  className="h-full"
+                >
 
-              </FadeUp>
+                  <ProjectCard
+                    {...project}
+                  />
 
-            </div>
+                </FadeUp>
 
-          ))}
+              </div>
+
+            )
+          )}
 
         </div>
 
@@ -192,18 +282,20 @@ export default function Projects() {
         "
       >
         <div className="absolute -bottom-[28px] left-0 flex w-full">
-          {Array.from({ length: 30 }).map((_, index) => (
-            <div
-              key={`bottom-${index}`}
-              className="
-                h-[70px]
-                w-[70px]
-                shrink-0
-                rounded-full
-                bg-[#FFF7E7]
-              "
-            />
-          ))}
+          {Array.from({ length: 30 }).map(
+            (_, index) => (
+              <div
+                key={`bottom-${index}`}
+                className="
+                  h-[70px]
+                  w-[70px]
+                  shrink-0
+                  rounded-full
+                  bg-[#FFF7E7]
+                "
+              />
+            )
+          )}
         </div>
       </div>
 
@@ -298,7 +390,8 @@ function ProjectCard({
             group-hover:scale-110
           "
           style={{
-            fontFamily: "var(--font-montserrat)",
+            fontFamily:
+              "var(--font-montserrat)",
             fontWeight: 700,
           }}
         >
@@ -325,7 +418,8 @@ function ProjectCard({
             backdrop-blur-sm
           "
           style={{
-            fontFamily: "var(--font-montserrat)",
+            fontFamily:
+              "var(--font-montserrat)",
             fontWeight: 500,
           }}
         >
@@ -355,7 +449,8 @@ function ProjectCard({
             group-hover:h-20
           "
           style={{
-            fontFamily: "var(--font-montserrat)",
+            fontFamily:
+              "var(--font-montserrat)",
             fontWeight: 700,
           }}
         >
@@ -397,7 +492,8 @@ function ProjectCard({
               group-hover:text-[#BB7D40]
             "
             style={{
-              fontFamily: "var(--font-montserrat)",
+              fontFamily:
+                "var(--font-montserrat)",
               fontWeight: 700,
             }}
           >
@@ -410,7 +506,8 @@ function ProjectCard({
           <p
             className="mt-2 text-sm text-[#BB7D40]"
             style={{
-              fontFamily: "var(--font-montserrat)",
+              fontFamily:
+                "var(--font-montserrat)",
               fontWeight: 500,
             }}
           >
@@ -431,7 +528,8 @@ function ProjectCard({
               sm:block
             "
             style={{
-              fontFamily: "var(--font-montserrat)",
+              fontFamily:
+                "var(--font-montserrat)",
               fontWeight: 400,
             }}
           >
@@ -457,7 +555,8 @@ function ProjectCard({
             group-hover:translate-x-2
           "
           style={{
-            fontFamily: "var(--font-montserrat)",
+            fontFamily:
+              "var(--font-montserrat)",
             fontWeight: 500,
           }}
         >
