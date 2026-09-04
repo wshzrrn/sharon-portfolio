@@ -1,40 +1,168 @@
 "use client";
 
-import FadeUp from "../animations/FadeUp";
 import { motion } from "framer-motion";
+import ProjectCarousel, {
+  type CarouselCategory,
+} from "./ProjectCarousel";
 
-const projects = [
+const projectCategories: CarouselCategory[] = [
   {
-    chapter: "01",
-    title: "Information Systems",
-    category: "",
-    description: "",
-    color: "#BB7D40",
-    span: "lg:col-span-8",
+    number: "01",
+    name: "Professional Work",
+    description: "Selected collaborations, campaigns, and client work.",
+    accent: "#FFD6D6",
+    projects: [
+      {
+        id: "professional-01",
+        title: "Wise Choice Instagram Story",
+        category: "Design",
+        year: "",
+        description: "",
+        image: "/projects/professional/wisechoice.jpeg",
+        url: "",
+      },
+      {
+        id: "professional-02",
+        title: "Manners Matter Instagram Story",
+        category: "Design",
+        year: "",
+        description: "",
+        image: "/projects/professional/mannersmatter.jpeg",
+        file: "",
+      },
+      {
+        id: "professional-03",
+        title: "Servolution Reels",
+        category: "Video Editing",
+        year: "",
+        description: "",
+        image: "/projects/professional/servo.jpeg",
+        url: "https://www.instagram.com/reel/C3CYdfUhfQQ/?igsi=MWtkZjl2Z25tOGhmeQ=="
+      },
+      {
+        id: "professional-04",
+        title: "Caca PR Ambassador Video",
+        category: "Video Editing",
+        year: "",
+        description: "",
+        image: "/projects/professional/caca.jpeg",
+        url: "https://drive.google.com/file/d/1iYszy2Vl3ARr-eiEcQIUmEjhrk9I9y4I/view?usp=drivesdk"
+      },
+      {
+        id: "professional-05",
+        title: "Delune Reels",
+        category: "Video Editing",
+        year: "",
+        description: "",
+        image: "/projects/professional/delune.jpeg",
+        url: "https://www.instagram.com/reel/DLw_xs1PctF/?igsi=MXkyMjI2NmZyYmJlag=="
+      },
+      {
+        id: "professional-06",
+        title: "Elita Tiktok",
+        category: "Video Editing",
+        year: "",
+        description: "",
+        image: "/projects/professional/elita.jpeg",
+        url: "https://www.tiktok.com/@ce_elita/video/7635251033161125127?_r=1&_t=ZS-99RAaSkLMSz"
+      },
+      {
+        id: "professional-07",
+        title: "GBK Reels",
+        category: "Video Editing",
+        year: "",
+        description: "",
+        image: "/projects/professional/gbk.jpeg",
+        url: "https://www.instagram.com/reel/DA5bBMJJp7u/?igsi=YjY4bTZqcDV1ZWcx"
+      },
+      {
+        id: "professional-08",
+        title: "Bali L-Men Reels",
+        category: "Video Editing",
+        year: "",
+        description: "",
+        image: "/projects/professional/lmen.jpeg",
+        url: "https://www.instagram.com/reel/DMIY6VCvwbR/?igsi=MXB2MGhkN2tkYTRhcw=="
+      },
+    ],
   },
   {
-    chapter: "02",
-    title: "Professional Work",
-    category: "",
-    description: "",
-    color: "#FFD6D6",
-    span: "lg:col-span-4",
+    number: "02",
+    name: "Information Systems",
+    description: "Digital products, systems, and technology-based work.",
+    accent: "#A9C5D6",
+    projects: [
+      {
+        id: "systems-01",
+        title: "IS Project Management",
+        category: "Information System",
+        year: "",
+        description: "",
+        image: "/projects/information-systems/ISPM.jpeg",
+        url: "https://www.figma.com/design/0ASKj22aw51kvFbSdlc0LE/IS-Project-Management?m=auto&t=3NFkegdtvAraEdaT-1",
+      },
+      {
+        id: "systems-02",
+        title: "UX Research & Design",
+        category: "Information System",
+        year: "",
+        description: "",
+        image: "/projects/information-systems/UXRD.jpeg",
+        url: "https://www.figma.com/design/oSiYvwGsOWpTMUf1aRUhEO/UX-Research-and-Design?m=auto&t=3NFkegdtvAraEdaT-1",
+      },
+      {
+        id: "systems-03",
+        title: "Rebranding Royal Park Hotel",
+        category: "Information System",
+        year: "",
+        description: "",
+        image: "/projects/information-systems/RoyalPark.png",
+        url: "https://www.figma.com/design/7dDo0L41L7Ul2Te2NWzjKF/Royal-Park-Application?m=auto&t=2sp7b4ypIukDxbR7-1"
+      },
+    ],
   },
   {
-    chapter: "03",
-    title: "Creative Experiments",
-    category: "",
-    description: "",
-    color: "#FEC841",
-    span: "lg:col-span-4",
-  },
-  {
-    chapter: "04",
-    title: "Visual Design",
-    category: "",
-    description: "",
-    color: "#709F57",
-    span: "lg:col-span-8",
+    number: "03",
+    name: "Visual Design",
+    description: "Branding, visual identity, and design explorations.",
+    accent: "#FEC841",
+    projects: [
+      {
+        id: "visual-01",
+        title: "NusaQuest Board Game",
+        category: "Product Design",
+        year: "",
+        description: "",
+        image: "/projects/visual-design/NusaQuest.png",
+        url: "https://www.figma.com/design/HXN0vdqS64jzZUJfyJeo3r/Nusa-Quest-boardgame?m=auto&t=3NFkegdtvAraEdaT-1",
+      },
+      {
+        id: "visual-02",
+        title: "ChaynPay Branding",
+        category: "Branding",
+        year: "",
+        description: "",
+        image: "/projects/visual-design/ChaynPay.png",
+        url: "https://www.figma.com/design/42ULGwK6ut7pxGbAHfjbqd/ChaynPay?m=auto&t=3NFkegdtvAraEdaT-1f",
+      },
+      {
+        id: "visual-03",
+        title: "Tarot Girls Poster Design",
+        category: "Graphic Design",
+        year: "",
+        description: "",
+        image: "/projects/visual-design/TarotGirls.jpeg",
+      },
+      {
+        id: "visual-04",
+        title: "The Unknown Place Poster Design",
+        category: "Graphic Design",
+        year: "",
+        description: "",
+        image: "/projects/visual-design/TUP.jpeg",
+      },
+      
+    ],
   },
 ];
 
@@ -43,549 +171,83 @@ export default function Projects() {
     <section
       id="projects"
       className="
-        relative
-        overflow-hidden
-        bg-[#CF1C1F]
-        px-6
-        pt-24
-        pb-28
-        lg:px-10
+        relative overflow-hidden bg-[#CF1C1F]
+        px-5 pb-32 pt-28 sm:px-8 lg:px-10
       "
     >
-
-      {/* ================================================= */}
-{/* BACKGROUND STRIPES */}
-{/* ================================================= */}
-
-<div
-  className="
-    pointer-events-none
-    absolute
-    inset-0
-    z-0
-    overflow-hidden
-  "
->
-  {Array.from({ length: 14 }).map(
-    (_, index) => {
-      const isLight = index % 2 === 0;
-
-      return (
-        <div
-          key={`stripe-${index}`}
-          className="
-            absolute
-            top-0
-            h-full
-          "
-          style={{
-            left: `${index * 7.2}%`,
-            width:
-              index % 3 === 0
-                ? "4.5%"
-                : "5.2%",
-            backgroundColor: isLight
-              ? "#FFF7E7"
-              : "#FEC841",
-            opacity: isLight
-              ? 0.10
-              : 0.07,
-            transform:
-              index % 2 === 0
-                ? "skewX(-1deg)"
-                : "skewX(1deg)",
-          }}
-        >
-          {/* INNER BLUE LINE */}
-
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        {Array.from({ length: 14 }).map((_, index) => (
           <div
-            className="
-              absolute
-              left-1/2
-              top-0
-              h-full
-              w-[3px]
-              -translate-x-1/2
-              rounded-full
-            "
+            key={index}
+            className="absolute top-0 h-full"
             style={{
-              backgroundColor:
-                "#A9C5D6",
-              opacity: 0.28,
+              left: `${index * 7.2}%`,
+              width: index % 3 === 0 ? "4.5%" : "5.2%",
+              backgroundColor: index % 2 === 0 ? "#FFF7E7" : "#FEC841",
+              opacity: index % 2 === 0 ? 0.1 : 0.07,
+              transform: index % 2 === 0 ? "skewX(-1deg)" : "skewX(1deg)",
             }}
-          />
+          >
+            <div className="absolute left-1/2 top-0 h-full w-[3px] -translate-x-1/2 bg-[#A9C5D6] opacity-30" />
+          </div>
+        ))}
+      </div>
 
-          {/* SOFT INNER HIGHLIGHT */}
-
-          <div
-            className="
-              absolute
-              left-[22%]
-              top-0
-              h-full
-              w-[10px]
-            "
-            style={{
-              backgroundColor:
-                "#FFFDF5",
-              opacity: 0.08,
-            }}
-          />
-        </div>
-      );
-    }
-  )}
-</div>
-
-      {/* ================================================= */}
-      {/* TOP SCALLOPED EDGE */}
-      {/* ================================================= */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          left-0
-          right-0
-          top-0
-          z-20
-          h-[100px]
-          overflow-hidden
-        "
-      >
+      <div className="pointer-events-none absolute left-0 right-0 top-0 z-20 h-[100px] overflow-hidden">
         <div className="absolute -top-[30px] left-0 flex w-full">
-          {Array.from({ length: 30 }).map(
-            (_, index) => (
-              <div
-                key={`top-${index}`}
-                className="
-                  h-[70px]
-                  w-[70px]
-                  shrink-0
-                  rounded-full
-                  bg-[#FFF7E7]
-                "
-              />
-            )
-          )}
+          {Array.from({ length: 30 }).map((_, index) => (
+            <div
+              key={index}
+              className="h-[70px] w-[70px] shrink-0 rounded-full bg-[#FFF7E7]"
+            />
+          ))}
         </div>
       </div>
 
-
-      {/* ================================================= */}
-      {/* PROJECT CONTENT */}
-      {/* ================================================= */}
-
-      <div
-        className="
-          relative
-          z-10
-          mx-auto
-          w-full
-          max-w-7xl
-        "
-      >
-
-        {/* ================================================= */}
-        {/* TITLE */}
-        {/* ================================================= */}
-
+      <div className="relative z-10 mx-auto w-full max-w-[1320px]">
         <motion.div
-          className="relative flex justify-center"
+          className="flex justify-center"
           initial={{ opacity: 0, y: 20, scale: 0.96 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true, amount: 0.15 }}
         >
-
-            <h2
-              className="
-                relative
-                z-10
-                text-center
-                text-[90px]
-                leading-[0.75]
-                text-[#FEC841]
-                sm:text-[110px]
-                md:text-[130px]
-                lg:text-[150px]
-              "
-              style={{
-                fontFamily:
-                  "var(--font-passions-conflict)",
-                fontWeight: 400,
-
-                textShadow:
-                  "3px 4px 0 #713901, 0 8px 18px rgba(113,57,1,0.25)",
-              }}
-            >
-              Projects
-            </h2>
-
-          </motion.div>
-
-
-        {/* ================================================= */}
-        {/* PROJECT GRID */}
-        {/* ================================================= */}
-
-        <div
-          className="
-            mt-16
-            grid
-            grid-cols-1
-            gap-5
-            lg:auto-rows-[480px]
-            lg:grid-cols-12
-            lg:items-stretch
-          "
-        >
-
-          {projects.map(
-            (project, index) => (
-
-              <div
-                key={project.title}
-                className={`${project.span} h-full`}
-              >
-
-                <FadeUp
-                  delay={index * 0.08}
-                  className="h-full"
-                >
-
-                  <ProjectCard
-                    {...project}
-                  />
-
-                </FadeUp>
-
-              </div>
-
-            )
-          )}
-
-        </div>
-
-      </div>
-
-
-      {/* ================================================= */}
-      {/* BOTTOM SCALLOPED EDGE */}
-      {/* ================================================= */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          bottom-0
-          left-0
-          right-0
-          z-20
-          h-[100px]
-          overflow-hidden
-        "
-      >
-        <div className="absolute -bottom-[28px] left-0 flex w-full">
-          {Array.from({ length: 30 }).map(
-            (_, index) => (
-              <div
-                key={`bottom-${index}`}
-                className="
-                  h-[70px]
-                  w-[70px]
-                  shrink-0
-                  rounded-full
-                  bg-[#FFF7E7]
-                "
-              />
-            )
-          )}
-        </div>
-      </div>
-
-    </section>
-  );
-}
-
-
-/* ================================================= */
-/* PROJECT CARD */
-/* ================================================= */
-
-function ProjectCard({
-  chapter,
-  title,
-  category,
-  description,
-  color,
-}: {
-  chapter: string;
-  title: string;
-  category: string;
-  description: string;
-  color: string;
-}) {
-  return (
-    <motion.article
-      className="
-        group
-        flex
-        h-full
-        min-h-0
-        flex-col
-        overflow-hidden
-        rounded-[30px]
-        bg-white
-        shadow-[0_18px_55px_rgba(0,0,0,0.08)]
-        transition-all
-        duration-500
-        hover:-translate-y-2
-        hover:shadow-[0_28px_70px_rgba(0,0,0,0.14)]
-      "
-      whileHover={{ scale: 1.01 }}
-      transition={{ duration: 0.3 }}
-    >
-
-      {/* ============================================= */}
-      {/* COLOR AREA */}
-      {/* ============================================= */}
-
-      <div
-        className="
-          relative
-          h-[62%]
-          min-h-[220px]
-          overflow-hidden
-        "
-        style={{
-          backgroundColor: color,
-        }}
-      >
-
-        {/* Decorative circle */}
-
-        <motion.div
-          className="
-            absolute
-            -right-16
-            -top-16
-            h-48
-            w-48
-            rounded-full
-            border
-            border-white/25
-            transition-transform
-            duration-700
-            group-hover:scale-125
-          "
-          whileHover={{ scale: 1.15 }}
-          transition={{ duration: 0.5 }}
-        />
-
-
-        {/* Large chapter number */}
-
-        <motion.div
-          className="
-            absolute
-            left-7
-            top-6
-            text-[86px]
-            leading-none
-            text-white/10
-            transition-transform
-            duration-700
-            group-hover:scale-110
-          "
-          whileHover={{ scale: 1.1, x: 5 }}
-          transition={{ duration: 0.5 }}
-          style={{
-            fontFamily:
-              "var(--font-montserrat)",
-            fontWeight: 700,
-          }}
-        >
-          {chapter}
+          <h2
+            className="
+              text-center text-[88px] leading-[0.75] text-[#FEC841]
+              sm:text-[110px] md:text-[130px] lg:text-[150px]
+            "
+            style={{
+              fontFamily: "var(--font-passions-conflict)",
+              textShadow:
+                "3px 4px 0 #713901, 0 8px 18px rgba(113,57,1,0.25)",
+            }}
+          >
+            Projects
+          </h2>
         </motion.div>
 
-
-        {/* Chapter label */}
-
-        <div
-          className="
-            absolute
-            bottom-6
-            left-7
-            rounded-full
-            border
-            border-white/30
-            bg-white/10
-            px-4
-            py-1.5
-            text-[10px]
-            tracking-[0.3em]
-            text-white
-            backdrop-blur-sm
-          "
-          style={{
-            fontFamily:
-              "var(--font-montserrat)",
-            fontWeight: 500,
-          }}
-        >
-          CHAPTER {chapter}
+        <div className="mt-14 space-y-14 sm:mt-16 sm:space-y-16">
+          {projectCategories.map((category, index) => (
+            <ProjectCarousel
+              key={category.name}
+              category={category}
+              index={index}
+            />
+          ))}
         </div>
-
-
-        {/* Bookmark */}
-
-        <div
-          className="
-            absolute
-            right-7
-            top-0
-            flex
-            h-16
-            w-7
-            items-end
-            justify-center
-            rounded-b-xl
-            bg-[#FFEDC9]
-            text-[10px]
-            text-[#3F4A32]
-            shadow-sm
-            transition-all
-            duration-300
-            group-hover:h-20
-          "
-          style={{
-            fontFamily:
-              "var(--font-montserrat)",
-            fontWeight: 700,
-          }}
-        >
-          <span className="mb-2">
-            {chapter}
-          </span>
-        </div>
-
       </div>
 
-
-      {/* ============================================= */}
-      {/* CARD CONTENT */}
-      {/* ============================================= */}
-
-      <div
-        className="
-          flex
-          h-[38%]
-          flex-col
-          justify-between
-          px-7
-          py-6
-          sm:px-8
-        "
-      >
-
-        <div>
-
-          {/* TITLE */}
-
-          <h3
-            className="
-              text-2xl
-              leading-tight
-              text-[#3F4A32]
-              transition-colors
-              duration-300
-              group-hover:text-[#BB7D40]
-            "
-            style={{
-              fontFamily:
-                "var(--font-montserrat)",
-              fontWeight: 700,
-            }}
-          >
-            {title}
-          </h3>
-
-
-          {/* CATEGORY */}
-
-          <p
-            className="mt-2 text-sm text-[#BB7D40]"
-            style={{
-              fontFamily:
-                "var(--font-montserrat)",
-              fontWeight: 500,
-            }}
-          >
-            {category}
-          </p>
-
-
-          {/* DESCRIPTION */}
-
-          <p
-            className="
-              mt-3
-              hidden
-              max-w-2xl
-              text-sm
-              leading-6
-              text-[#68705A]
-              sm:block
-            "
-            style={{
-              fontFamily:
-                "var(--font-montserrat)",
-              fontWeight: 400,
-            }}
-          >
-            {description}
-          </p>
-
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 h-[100px] overflow-hidden">
+        <div className="absolute -bottom-[28px] left-0 flex w-full">
+          {Array.from({ length: 30 }).map((_, index) => (
+            <div
+              key={index}
+              className="h-[70px] w-[70px] shrink-0 rounded-full bg-[#FFF7E7]"
+            />
+          ))}
         </div>
-
-
-        {/* READ CHAPTER */}
-
-        <button
-          className="
-            mt-4
-            flex
-            w-fit
-            items-center
-            gap-2
-            text-sm
-            text-[#FB2501]
-            transition-all
-            duration-300
-            group-hover:translate-x-2
-          "
-          style={{
-            fontFamily:
-              "var(--font-montserrat)",
-            fontWeight: 500,
-          }}
-        >
-          Coming Soon
-
-          <span
-            className="
-              transition-transform
-              duration-300
-              group-hover:translate-x-1
-            "
-          >
-            →
-          </span>
-        </button>
-
       </div>
-
-    </motion.article>
+    </section>
   );
 }
